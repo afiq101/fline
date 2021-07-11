@@ -41,13 +41,101 @@
             border-top-right-radius: 8px;
         }
 
+        .floatingButtonWrap {
+            display: block;
+            position: fixed;
+            bottom: 45px;
+            right: 45px;
+            z-index: 999999999;
+        }
+
+        .floatingButtonInner {
+            position: relative;
+        }
+
+        .floatingButton {
+            display: block;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            background: black;
+            color: #f6993f;
+            line-height: 50px;
+            position: absolute;
+            border-radius: 50% 50%;
+            bottom: 0px;
+            right: 0px;
+            border: 5px solid #f6993f;
+            /* opacity: 0.3; */
+            opacity: 1;
+            transition: all 0.4s;
+        }
+
+        .floatingButton .fa {
+            font-size: 15px !important;
+        }
+
+        .floatingButton.open,
+        .floatingButton:hover,
+        .floatingButton:focus,
+        .floatingButton:active {
+            opacity: 1;
+            color: #fff;
+        }
+
+
+        .floatingButton .fa {
+            transform: rotate(0deg);
+            transition: all 0.4s;
+        }
+
+        .floatingButton.open .fa {
+            transform: rotate(270deg);
+        }
+
+        .floatingMenu {
+            position: absolute;
+            bottom: 80px;
+            right: 0px;
+            /* width: 200px; */
+            display: none;
+        }
+
+        .floatingMenu li {
+            width: 100%;
+            float: right;
+            list-style: none;
+            text-align: right;
+            margin-bottom: 5px;
+        }
+
+        .floatingMenu li a {
+            padding: 8px 15px;
+            display: inline-block;
+            background: #f6993f;
+            color: black;
+            border-radius: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: all 0.4s;
+            /* -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22);
+            box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
+            -webkit-box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
+            box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
+        }
+
+        .floatingMenu li a:hover {
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
     </style>
 @endsection
 
 @section('content')
     <div class="container-fluid rounded p-3" style="max-width: 488px; width: 100%;">
         <div class="d-flex flex-column">
-            <div class="contain hovereffect d-flex justify-content-center">
+            <div class="contain hovereffect d-flex justify-content-center p-3">
                 <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/media/img9.jpg') }}" alt="">
             </div>
                 <div class="p-5 text-center">
@@ -161,10 +249,64 @@
             </div>
         </div>
     </div>
+
+<div class="floatingButtonWrap">
+    <div class="floatingButtonInner">
+        <a href="#" class="floatingButton">
+            <i class="fa fa-plus icon-default"></i>
+        </a>
+        <ul class="floatingMenu">
+            <li>
+                <a href="#">Your Media</a>
+            </li>
+            <li>
+                <a href="#">Edit Profile</a>
+            </li>
+        </ul>
+    </div>
+</div>
 @endsection
 
 @section('script-bottom')
     <script>
+         $(document).ready(function(){
+            $('.floatingButton').on('click',
+            function(e){
+                e.preventDefault();
+                $(this).toggleClass('open');
+                if($(this).children('.fa').hasClass('fa-plus'))
+                {
+                    $(this).children('.fa').removeClass('fa-plus');
+                    $(this).children('.fa').addClass('fa-close');
+                } 
+                else if ($(this).children('.fa').hasClass('fa-close')) 
+                {
+                    $(this).children('.fa').removeClass('fa-close');
+                    $(this).children('.fa').addClass('fa-plus');
+                }
+                $('.floatingMenu').stop().slideToggle();
+            }
+        );
+        $(this).on('click', function(e) {
+            var container = $(".floatingButton");
+
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && $('.floatingButtonWrap').has(e.target).length === 0) 
+            {
+                if(container.hasClass('open'))
+                {
+                    container.removeClass('open');
+                }
+                if (container.children('.fa').hasClass('fa-close')) 
+                {
+                    container.children('.fa').removeClass('fa-close');
+                    container.children('.fa').addClass('fa-plus');
+                }
+                $('.floatingMenu').hide();
+            }
+        });
+    });
+    
         const video = document.querySelector('video');
 
         // init Masonry
