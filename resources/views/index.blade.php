@@ -46,7 +46,6 @@
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
         @foreach ($images as $item)
-
             <div class="grid-item">
                 <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
                     @isset($item->image)
