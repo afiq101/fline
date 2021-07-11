@@ -219,6 +219,8 @@
             var title = $(this).children().find("span").first().text();
             if (typeof imagePath === 'undefined') {
                 var videoPath = $(this).children().find("video").find('source').attr("src");
+                var video = $("#video-modal");
+                video.get(0).pause();
                 $("#videosrc-modal").attr("src", videoPath);
                 video.get(0).load();
                 video.get(0).play();
