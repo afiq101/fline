@@ -230,6 +230,27 @@ class MediaController extends Controller
         DB::table('medias')->where('id', '=', $id)->delete();
         return $this->index();
     }
+
+
+    public function getMetadata($id)
+    {
+        $getMetadataImage = DB::table('medias')
+        ->join('images', 'medias.id', '=', 'images.mediaid')
+        ->select('medias.*', 'images.width', 'images.height')
+        ->where('medias.id', '=', $id)
+        ->get();
+        
+        $getMetadataVideo = DB::table('medias')
+        ->join('videos', 'medias.id', '=', 'videos.mediaid')
+        ->select('medias.*', 'videos.duaration')
+        ->where('medias.id', '=', $id)
+        ->get();
+
+        return response()->json([
+            'imagemeta' => $getMetadataImage,
+            'videometa' => $getMetadataVideo
+         ],200);
+    }
 }
 
 //composer require james-heinrich/getid3
