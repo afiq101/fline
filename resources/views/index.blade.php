@@ -2,80 +2,33 @@
 
 @section('css')
     <style>
-        .contain {
-            height: 300px;
-            width: 100%;
-            border-radius: 16px;
+        .icon ion-icon {
+            color: white;
+            font-size: 22px;
         }
 
-        .contain img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-
+        .fav ion-icon {
+            color: #FFAA48;
+            font-size: 16px;
         }
 
-        .masonry {
-            width: 90%;
-            margin: 0 auto;
+        .overlay h2 .react {
+            float: right;
         }
 
-        /* fluid 5 columns */
-        .grid-sizer,
-        .grid-item {
-            width: 19%;
-            margin-bottom: 20px;
+        .overlay h2 .react span {
+            display: inline-block;
+            vertical-align: middle;
         }
 
-        .gutter-sizer {
-            width: 1%;
-        }
-
-        @media screen and (max-width: 1200px) {
-
-            .grid-sizer,
-            .grid-item {
-                width: 30%;
-                margin-bottom: 20px;
-            }
-
-            .gutter-sizer {
-                width: 5%;
-            }
-        }
-
-        @media screen and (max-width: 992px) {
-
-            .grid-sizer,
-            .grid-item {
-                width: 49%;
-                margin-bottom: 20px;
-            }
-
-            .gutter-sizer {
-                width: 2%;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .masonry {
-                width: 90%;
-            }
-
-            .grid-sizer,
-            .grid-item {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .gutter-sizer {
-                width: 0%;
-            }
+        .overlay h2 .react ion-icon {
+            color: #ff6156;
+            font-size: 18px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
     </style>
-
 @endsection
 
 @section('content')
@@ -84,40 +37,431 @@
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
         <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img1.jpg') }}" alt="">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img9.jpg') }}" alt="">
+                <div class="fav">
+                    <ion-icon name="star"></ion-icon>
+                </div>
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
             </div>
         </div>
         <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img2.jpg') }}" alt="">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/imggif1.gif') }}" alt="">
+                <div class="fav">
+                    <ion-icon name="star"></ion-icon>
+                </div>
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/imggif2.gif') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>1.5k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
             </div>
         </div>
         <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img3.jpg') }}" alt="">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img6.jpg') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
             </div>
         </div>
         <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img4.jpg') }}" alt="">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/imggif3.gif') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
             </div>
         </div>
         <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img5.jpg') }}" alt="">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img7.jpg') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <video autoplay muted loop>
+                    <source src="{{ asset('assets/images/media/vid2.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="fav">
+                    <ion-icon name="star"></ion-icon>
+                </div>
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img8.jpg') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img10.jpg') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img12.jpg') }}" alt="">
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="contain hovereffect">
+                <video autoplay muted loop>
+                    <source src="{{ asset('assets/images/media/vid1.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <div class="fav">
+                    <ion-icon name="star"></ion-icon>
+                </div>
+                <div class="overlay">
+                    <h2>
+                        Title
+                        <div class="react">
+                            <ion-icon name="heart"></ion-icon>
+                            <span>2.3k</span>
+                        </div>
+                    </h2>
+                    <div class="icon">
+                        <a href="#">
+                            <ion-icon name="cloud-download-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="dimension">
+                        1920x1080
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('script-bottom')
     <script>
-        $('.grid').masonry({
+        const video = document.querySelector('video');
+
+        // init Masonry
+        var $grid = $('.grid').masonry({
             columnWidth: '.grid-sizer',
             itemSelector: '.grid-item',
             gutter: '.gutter-sizer',
-            percentPosition: true
-        })
+            isAnimated: true,
+            percentPosition: true,
+            animationOptions: {
+                duration: 700,
+                easing: 'linear',
+                queue: false
+            }
+        });
+        // layout Masonry after each image loads
+        // $grid.imagesLoaded().progress(function() {
+        //     $grid.masonry('layout');
+        // });
+
+        video.addEventListener('loadeddata', (event) => {
+            console.log('Yay! The readyState just increased to  ' +
+                'HAVE_CURRENT_DATA or greater for the first time.');
+            $grid.masonry('layout');
+        });
+
+        // $grid.on('.grid video', function() {
+        //     $grid.masonry('layout');
+        // });
     </script>
 @endsection

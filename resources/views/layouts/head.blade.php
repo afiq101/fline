@@ -7,3 +7,4 @@
         <!-- App css -->
         <link href="{{ URL::asset('assets/css/app.css') }}" id="app-css" rel="stylesheet">
         <link href="{{ URL::asset('assets/css/style.css') }}" id="style-css" rel="stylesheet">
+        <link href="{{ URL::asset('assets/css/hover.css') }}" id="style-css" rel="stylesheet">

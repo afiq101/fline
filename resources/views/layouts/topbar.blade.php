@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
     <a class="navbar-brand" href="#">
-        <img alt="Brand" width="100" src="{{ URL::asset('assets/images/logo/logoFLINE.PNG') }}">
+        <img alt="Brand" width="100" src="{{ URL::asset('assets/images/logo/logo.png') }}">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
