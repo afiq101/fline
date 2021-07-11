@@ -1,0 +1,116 @@
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: white;
+}
+.close:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.contain {
+    width: 100%;
+    border-radius: 16px;
+}
+
+.contain img {
+    object-fit: cover;
+    width: 100%;
+    border-radius: 16px;
+}
+
+.contain video {
+    width: 100%;
+    border-radius: 16px;
+}
+
+.masonry {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.fav {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+.ct-header {
+    width: 100%;
+    height: 60vh;
+}
+
+.ct-header img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.ct-header video {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.ct-header-title {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 50px;
+    top: 0;
+    position: absolute;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.grid-sizer,
+.grid-item {
+    width: 19%;
+    margin-bottom: 20px;
+}
+
+.gutter-sizer {
+    width: 1%;
+}
+
+@media screen and (max-width: 1200px) {
+    .grid-sizer,
+    .grid-item {
+        width: 30%;
+        margin-bottom: 20px;
+    }
+
+    .gutter-sizer {
+        width: 5%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .grid-sizer,
+    .grid-item {
+        width: 49%;
+        margin-bottom: 20px;
+    }
+
+    .gutter-sizer {
+        width: 2%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .masonry {
+        width: 90%;
+    }
+
+    .grid-sizer,
+    .grid-item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .gutter-sizer {
+        width: 0%;
+    }
+}
