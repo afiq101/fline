@@ -144,7 +144,7 @@
                         <h3>{{auth()->user()->name}}</h3>
                     </div>
                     <div class="col-12 text-center row p-3 justify-content-center" style="color: #636b6f">
-                        <div class="col-md-4 row" >
+                        <div class="col-4 row" >
                             <div class="col-12">
                                 <h4>Like</h4>
                             </div>
@@ -152,17 +152,17 @@
                                 <h4>12</h4>
                             </div>
                         </div>
-                        <div class="col-md-4 row" >
+                        <div class="col-4 row" >
                             <div class="col-12">
-                                <h4>Favourite</h4>
+                                <h4>Post</h4>
                             </div>
                             <div class="col-12">
                                 <h4>20</h4>
                             </div>
                         </div>
-                        <div class="col-md-4 row">
+                        <div class="col-4 row">
                             <div class="col-12">
-                                <h4>Post</h4>
+                                <h4>Star</h4>
                             </div>
                             <div class="col-12">
                                 <h4>5</h4>
