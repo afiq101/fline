@@ -41,63 +41,90 @@
     {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
     </button> --}}
-    <div class="grid masonry">
-        <!-- .grid-sizer empty element, only used for element sizing -->
-        <div class="grid-sizer"></div>
-        <div class="gutter-sizer"></div>
-        @foreach ($images as $item)
-            <div class="grid-item">
-                <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
-                    @isset($item->image)
-                        <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
-                    @else
-                        <video autoplay muted loop>
-                            <source src="{{ asset($item->full_path) }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    @endisset
-                    <div class="fav">
-                        <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->id }}"></ion-icon>
-                    </div>
-                    <div class="overlay">
-                        <h2>
-                            <span>{{ $item->title }}</span>
-                            <div class="react">
-                                <ion-icon name="heart"></ion-icon>
-                                <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
-                            </div>
-                        </h2>
-                        <div class="icon">
-                            <a href="#">
-                                <ion-icon name="cloud-download-outline"></ion-icon>
-                            </a>
-                            <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
-                            <ion-icon @if ($item->user_like) name="heart" @else
-                                        name="heart-outline" @endif
-                                    id="likeIcon_{{ $item->id }}">
-                                </ion-icon>
-                            </a>
-                            <a href="#" onclick="onStarMedia('{{ $item->id }}')">
-                            <ion-icon @if ($item->user_star) name="star" @else
-                                        name="star-outline" @endif
-                                    id="starIcon_{{ $item->id }}">
-                                </ion-icon>
-                            </a>
-                            {{-- <a href="#" >
-                                <ion-icon name="bookmark-outline"></ion-icon>
-                            </a> --}}
-                        </div>
-                        @isset($item->image)
-                            <div class="dimension">
-                                {{ $item->image->width }} * {{ $item->image->height }}
-                            </div>
-                        @endisset
+    <div class="container-fluid">
+        <form method="POST" action="{{ route('home.store') }}">
+            @csrf
+            <div class="d-flex flex-row">
+                <input type="text" name="search" class="form-control" placeholder="Search for FLINEs">
+                <input type="submit" class="btn btn-primary ml-1" value="Search">
+            </div>
+        </form>
 
+        @isset($search)
+            <div class="my-3">
+                <p class="font-weight-normal">Showing results for query <span
+                        class="font-weight-bolder">{{ $search }}</span>
+                </p>
+            </div>
+        @endisset
+
+        @if($images->count() == 0)
+        <div class="my-5">
+            <p class="font-weight-bolder text-center text-muted">No FLINEs matches your query</p>
+        </div>
+        @endif
+
+        <div class="grid masonry">
+            <!-- .grid-sizer empty element, only used for element sizing -->
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+
+            @foreach ($images as $item)
+                <div class="grid-item">
+                    <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
+                        @isset($item->image)
+                            <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
+                        @else
+                            <video autoplay muted loop>
+                                <source src="{{ asset($item->full_path) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        @endisset
+                        <div class="fav">
+                            <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
+                                id="starIconTop_{{ $item->id }}"></ion-icon>
+                        </div>
+                        <div class="overlay">
+                            <h2>
+                                <span>{{ $item->title }}</span>
+                                <div class="react">
+                                    <ion-icon name="heart"></ion-icon>
+                                    <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
+                                </div>
+                            </h2>
+                            <div class="icon">
+                                <a href="#">
+                                    <ion-icon name="cloud-download-outline"></ion-icon>
+                                </a>
+                                <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
+                                <ion-icon @if ($item->user_like) name="heart" @else
+                                                                            name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
+                                    </ion-icon>
+                                </a>
+                                <a href="#" onclick="onStarMedia('{{ $item->id }}')">
+                                <ion-icon @if ($item->user_star) name="star" @else
+                                                                            name="star-outline" @endif id="starIcon_{{ $item->id }}">
+                                    </ion-icon>
+                                </a>
+                                {{-- <a href="#" >
+                                    <ion-icon name="bookmark-outline"></ion-icon>
+                                </a> --}}
+                            </div>
+                            @isset($item->image)
+                                <div class="dimension">
+                                    {{ $item->image->width }} * {{ $item->image->height }}
+                                </div>
+                            @endisset
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
+
+
+
 
     <!-- Dynamic Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
