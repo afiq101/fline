@@ -14,19 +14,34 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', 'HomeController@index');
 
 Auth::routes();
+Route::get('/',  function () {
+    return redirect(Route('home.index'));
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('home', 'HomeController');
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/comment/{mid}', 'CommentController@displayComment');
     Route::get('/profile', 'ProfileController@profile');
     Route::put('/updateprofile', 'ProfileController@updateprofile');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('Media')->prefix('Media')->name('Media.')->group(function(){
+Route::resource('/Media','MediaController');
+});
+
+Route::get('/Media/destroy/{id}', 'Media\MediaController@destroy');
+Route::get('/Media/edit/{id}', 'Media\MediaController@edit');
+Route::post('/Media/upload', 'Media\MediaController@update');
 
 Route::resource('like', 'UserLikeController');
 Route::resource('star', 'UserStarController');
+

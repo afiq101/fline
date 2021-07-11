@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -22,5 +23,20 @@ class HomeController extends Controller
         $images = Media::get();
 
         return view('index', compact('images'));
+    }
+
+    public function store(Request $request)
+    {
+        $search = null;
+        $images = Media::select();
+
+        if ($request->has('search') && $request->input('search') != ''){
+            $images = $images->where('title','LIKE','%' . $request->input('search') . '%');
+            $search = $request->input('search');
+        }
+
+        $images = $images->get();
+
+        return view('index', compact('images','search'));
     }
 }
