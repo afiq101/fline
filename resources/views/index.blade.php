@@ -64,7 +64,7 @@
                             <span>{{ $item->title }}</span>
                             <div class="react">
                                 <ion-icon name="heart"></ion-icon>
-                                <span>2.3k</span>
+                                <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
                             </div>
                         </h2>
                         <div class="icon">
@@ -248,6 +248,8 @@
             else if (data.status == 0){
                 $('#likeIcon_' + data.media_id).attr('name','heart-outline');
             }
+
+            $('#likeCount_'+ data.media_id).html(data.like_count);
         }
     </script>
 @endsection
