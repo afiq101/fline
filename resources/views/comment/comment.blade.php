@@ -28,7 +28,14 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <img src="{{ asset('assets/images/media/' . $owner[0]->path) }}" style="width: 20vw; border-radius: 10px 0 0 10px" alt="">
+                        @if ($owner[0]->extension == ".mp4")
+                            <video autoplay muted loop style="width: 20vw; border-radius: 10px 0 0 10px">
+                                <source src="{{ asset('assets/images/media/' . $owner[0]->path) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        @else
+                            <img src="{{ asset('assets/images/media/' . $owner[0]->path) }}" style="width: 20vw; border-radius: 10px 0 0 10px" alt="">
+                        @endif
                     </div>
                     <div class="col-6">
                         <div class="row">
