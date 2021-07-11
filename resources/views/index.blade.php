@@ -74,13 +74,13 @@
                             <a href="#">
                                 <ion-icon name="cloud-download-outline"></ion-icon>
                             </a>
-                            <a href="#" onclick="onLikeMedia({{ $item->id }})">
+                            <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
                             <ion-icon @if ($item->user_like) name="heart" @else
                                         name="heart-outline" @endif
                                     id="likeIcon_{{ $item->id }}">
                                 </ion-icon>
                             </a>
-                            <a href="#" onclick="onStarMedia({{ $item->id }})">
+                            <a href="#" onclick="onStarMedia('{{ $item->id }}')">
                             <ion-icon @if ($item->user_star) name="star" @else
                                         name="star-outline" @endif
                                     id="starIcon_{{ $item->id }}">
@@ -245,7 +245,7 @@
 
         // Like Media Script
         async function onLikeMedia(id) {
-            var res = await axios.post('{{ route('like.store') }}', {
+            var res = await axios.post("{{ route('like.store') }}", {
                 media_id: id
             });
 
@@ -262,7 +262,7 @@
 
         // Star Media Script
         async function onStarMedia(id) {
-            var res = await axios.post('{{ route('star.store') }}', {
+            var res = await axios.post("{{ route('star.store') }}", {
                 media_id: id
             });
 
