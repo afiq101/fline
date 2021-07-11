@@ -18,6 +18,9 @@ class MediaController extends Controller
      */
     public function index()
     {
+        $getUserMedia = DB::table('media')
+                ->where('UserID', '=', Auth::id())
+                ->get();
         return view('Media.MainPage');
     }
 
@@ -66,10 +69,8 @@ class MediaController extends Controller
 
                 }
 
-                //$pid = Auth::id();
-                $pid = 1;
-
-
+                $pid = Auth::id();
+                
                 $file->move("assets/Media/", $fileNameToStore);
 
                 $id = DB::table('media')->insertGetId([
