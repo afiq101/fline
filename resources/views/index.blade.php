@@ -57,7 +57,8 @@
                         </video>
                     @endisset
                     <div class="fav">
-                        <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->id }}"></ion-icon>
+                        <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
+                            id="starIconTop_{{ $item->id }}"></ion-icon>
                     </div>
                     <div class="overlay">
                         <h2>
@@ -71,15 +72,15 @@
                             <a href="#">
                                 <ion-icon name="cloud-download-outline"></ion-icon>
                             </a>
-                            <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
+                            <a href="#" onclick="onLikeMedia(event,'{{ $item->id }}')">
                             <ion-icon @if ($item->user_like) name="heart" @else
-                                        name="heart-outline" @endif
+                                                    name="heart-outline" @endif
                                     id="likeIcon_{{ $item->id }}">
                                 </ion-icon>
                             </a>
                             <a href="#" onclick="onStarMedia('{{ $item->id }}')">
                             <ion-icon @if ($item->user_star) name="star" @else
-                                        name="star-outline" @endif
+                                                    name="star-outline" @endif
                                     id="starIcon_{{ $item->id }}">
                                 </ion-icon>
                             </a>
@@ -91,8 +92,9 @@
                             <div class="dimension">
                                 {{ $item->image->width }} * {{ $item->image->height }}
                             </div>
-                        @endisset
 
+                        @endisset
+                        comment = {{ $item->userComment }}
                     </div>
                 </div>
             </div>
@@ -120,6 +122,9 @@
                             <source id="videosrc-modal" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <div class="comment">
+                            <ion-icon name="chatbubbles-outline"></ion-icon>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -241,7 +246,9 @@
         });
 
         // Like Media Script
-        async function onLikeMedia(id) {
+        async function onLikeMedia(e, id) {
+            e.preventDefault();
+            e.stopPropagation();
             var res = await axios.post("{{ route('like.store') }}", {
                 media_id: id
             });
@@ -255,6 +262,8 @@
             }
 
             $('#likeCount_' + data.media_id).html(data.like_count);
+            // $('#imageModal').modal('hide');
+
         }
 
         // Star Media Script
