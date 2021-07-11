@@ -55,8 +55,8 @@
 
         .floatingButton {
             display: block;
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             text-align: center;
             background: black;
             color: #f6993f;
@@ -72,7 +72,7 @@
         }
 
         .floatingButton .fa {
-            font-size: 15px !important;
+            font-size: 20px !important;
         }
 
         .floatingButton.open,
@@ -95,7 +95,7 @@
 
         .floatingMenu {
             position: absolute;
-            bottom: 80px;
+            bottom: 70px;
             right: 0px;
             /* width: 200px; */
             display: none;
@@ -136,11 +136,11 @@
     <div class="container-fluid rounded p-3" style="max-width: 488px; width: 100%;">
         <div class="d-flex flex-column">
             <div class="contain hovereffect d-flex justify-content-center p-3">
-                <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/media/img9.jpg') }}" alt="">
+                <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
             </div>
                 <div class="p-5 text-center">
                     <div class="col-12">
-                        <h3>NyzMni
+                        <h3>{{auth()->user()->name}}
                         </h3>
                     </div>
                     <!-- <div class="col-12">
@@ -165,11 +165,13 @@
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
-        @for ($i = 0; $i < 5; $i++)
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+
+        @foreach($medias as $media)
+        
+        <button type="button" data-toggle="modal" data-target="#exampleModalCenter">
         <div class="grid-item">
             <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img9.jpg') }}" alt="">
+                <img class="img-responsive" src="{{ asset('assets/images/media/'.$media->path) }}" alt="">
                 <div class="fav">
                     <ion-icon name="star"></ion-icon>
                 </div>
@@ -202,8 +204,10 @@
             </div>
         </div>
     </button>
-    @endfor
-    </div>
+    
+    @endforeach
+    
+</div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
