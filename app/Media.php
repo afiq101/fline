@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Media extends Model
 {
-    //
+    protected $table = 'medias';
+
+    protected $fillable = [
+        'path', 'extension', 'title', 'description', 'dateuploaded', 'size', 'userid'
+    ];
 }
