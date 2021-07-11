@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Media;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Validator;
+use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class MediaController extends Controller
 {
@@ -37,6 +41,7 @@ class MediaController extends Controller
     {
         if($request->hasFile('file'))
             {
+                $date = Carbon::now();
                 
                 $fileNameToStore = $request->file->hashName();
 
@@ -46,8 +51,25 @@ class MediaController extends Controller
 
                 $file = $request->file;
 
-                $pid = Auth::id();
-                
+                if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
+                {
+                    $getID3 = new \getID3;
+                    $fileinfo = $getID3->analyze($file);
+                    $duration = date('H:i:s.v', $fileinfo['playtime_seconds']);
+                }
+
+                else
+                {
+                    $data = getimagesize($file);
+                    $width = $data[0];
+                    $height = $data[1];
+
+                }
+
+                //$pid = Auth::id();
+                $pid = 1;
+
+
                 $file->move("assets/Media/", $fileNameToStore);
 
                 $id = DB::table('media')->insertGetId([
@@ -56,29 +78,27 @@ class MediaController extends Controller
                     'Description' => $request->desc,
                     'file_path' => $fileNameToStore,
                     'Size' => $fileSize,
-                    'UserID' => $pid
+                    'UserID' => $pid,
+                    'created_at' => $date
                 ]);
-    
-                if($extension == 'jpeg')
-    
-                $oid = DB::table('users')
-                        ->where('id' , $pid)
-                        ->value('OID');
-    
-                DB::table('menu_organization')->insert([
-                    'menu_id' => $id,
-                    'organization_id' => $oid
-                ]);
-       
-                if($id != NULL)
+
+                if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
                 {
-                    return redirect()->route('canteen.Canteen.index');
+                    DB::table('video')->insert([
+                        'Duration' => $duration,
+                        'MediaID' => $id
+                    ]);
                 }
-    
                 else
                 {
-                    return view('canteen.management.add');
+                    DB::table('image')->insert([
+                        'Width' => $width,
+                        'Height' => $height,
+                        'MediaID' => $id
+                    ]);
                 }
+                
+                return view('Media.MainPage');
                 
             }
     }
@@ -128,3 +148,5 @@ class MediaController extends Controller
         //
     }
 }
+
+//composer require james-heinrich/getid3
