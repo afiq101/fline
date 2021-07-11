@@ -28,19 +28,6 @@
             vertical-align: middle;
         }
 
-        .ct-header {
-            width: 100%;
-            height: 200px;
-        }
-
-        .ct-header img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
     </style>
 @endsection
 
