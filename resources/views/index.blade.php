@@ -34,6 +34,45 @@
             border-radius: 50%;
         }
 
+        .comment {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            bottom: 50px;
+            left: 8px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+        }
+
+        .comment a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .comment a:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .comment ion-icon {
+            font-size: 30px;
+            display: block;
+            margin: auto;
+            padding-top: 6px;
+        }
+
+        .comment .noti {
+            position: relative;
+            bottom: 43px;
+            left: 30px;
+            width: 21px;
+            height: 21px;
+            background-color: #FA5F01;
+            border-radius: 50%;
+            text-align: center;
+
+        }
+
     </style>
 @endsection
 
@@ -58,10 +97,10 @@
             </div>
         @endisset
 
-        @if($images->count() == 0)
-        <div class="my-5">
-            <p class="font-weight-bolder text-center text-muted">No FLINEs matches your query</p>
-        </div>
+        @if ($images->count() == 0)
+            <div class="my-5">
+                <p class="font-weight-bolder text-center text-muted">No FLINEs matches your query</p>
+            </div>
         @endif
 
         <div class="grid masonry">
@@ -98,12 +137,12 @@
                                 </a>
                                 <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
                                 <ion-icon @if ($item->user_like) name="heart" @else
-                                                                            name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
+                                                                                                                                    name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
                                 <a href="#" onclick="onStarMedia('{{ $item->id }}')">
                                 <ion-icon @if ($item->user_star) name="star" @else
-                                                                            name="star-outline" @endif id="starIcon_{{ $item->id }}">
+                                                                                                                                    name="star-outline" @endif id="starIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
                                 {{-- <a href="#" >
@@ -148,7 +187,12 @@
                             Your browser does not support the video tag.
                         </video>
                         <div class="comment">
-                            <ion-icon name="chatbubbles-outline"></ion-icon>
+                            <a href="/comment/1">
+                                <ion-icon name="chatbubbles-outline"></ion-icon>
+                                <div id="commendnoti" class="noti">
+                                    3
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="row">
@@ -199,23 +243,6 @@
                                             </table>
                                         </div>
                                     </div>
-                                    {{-- <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                                        <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
-                                                data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
-                                                class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment</a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionModal"
-                                        class="collapse">
-                                        <div class="row p-3">
-                                            <div class="col-3">
-                                                <img class="dp" src="{{ asset('assets/images/profile/user001.jpg') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="col-5"></div>
-                                            <div class="col-4"></div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
