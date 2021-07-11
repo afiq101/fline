@@ -39,7 +39,11 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <img class="rounded-circle" src="{{ asset('assets/images/profile/' . auth()->user()->userimage) }}" alt="user" width="40">
+                            @if ($owner[0]->userimage != null)
+                                <img class="rounded-circle" src="{{ asset('assets/images/profile/' . $owner[0]->userimage) }}" alt="user" width="40">
+                            @else
+                                <img class="rounded-circle" src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="user" width="40">
+                            @endif
                             <p class="mt-auto mb-auto ml-2"> {{ __($owner[0]->name) }} - <span class="text-muted">{{ date('d/m/Y', strtotime($owner[0]->uploaded_at)) }}</span> </p>
                         </div>
                         <hr style="background-color: white">
@@ -58,7 +62,13 @@
                                     <div class="d-flex justify-content-center py-2" style="width: 100%">
                                         <div class="second py-2 px-2"> <span class="text1">{{ $comment->comment }}</span>
                                             <div class="d-flex justify-content-between py-1 pt-2">
-                                                <div><img class="rounded-circle" src="{{ asset('assets/images/profile/' . $comment->userimage) }}" width="18"><span class="mt-auto mb-auto ml-2 text-muted">{{ $comment->name }} - {{ date('d/m/Y', strtotime($comment->commented_at)) }}</span></div>
+                                                <div>
+                                                    @if ($comment->userimage != null)
+                                                        <img class="rounded-circle" src="{{ asset('assets/images/profile/' . $comment->userimage) }}" width="18">
+                                                    @else
+                                                        <img class="rounded-circle" src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="user" width="18">
+                                                    @endif
+                                                    <span class="mt-auto mb-auto ml-2 text-muted">{{ $comment->name }} - {{ date('d/m/Y', strtotime($comment->commented_at)) }}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +91,7 @@
             if (event.keyCode === 13) {
                 event.preventDefault();
                 
-                $.post("/api/post-comment/{{ $mid }}", { comment: commentField.value } )
+                axios.post("/api/post-comment/{{ $mid }}", { comment: commentField.value } )
                 .then((data) => {
                     swal("Comment Added!", "You submitted a new comment!", "success")
                     .then((value) => {
