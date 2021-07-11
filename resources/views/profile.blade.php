@@ -119,7 +119,7 @@
             white-space: nowrap;
             transition: all 0.4s;
             /* -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22);
-            box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
+                box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
             -webkit-box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
             box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
         }
@@ -149,7 +149,7 @@
                 </div>
                 <div class="p-3 text-center row justify-content-center">
                     <div class="col-12">
-                        <h3>{{auth()->user()->name}}</h3>
+                        <h3>{{ auth()->user()->name }}</h3>
                     </div>
                     <div class="col-12 text-center row p-3 justify-content-center">
                         <div class="col-4 row" >
@@ -157,15 +157,15 @@
                                 <h4>Like</h4>
                             </div>
                             <div class="col-12">
-                                <h4>{{$medias->count()}}</h4>
+                                <h4>{{ $medias->count() }}</h4>
                             </div>
                         </div>
-                        <div class="col-4 row" >
+                        <div class="col-4 row">
                             <div class="col-12">
                                 <h4>Post</h4>
                             </div>
                             <div class="col-12">
-                                <h4>{{$totalPost}}</h4>
+                                <h4>{{ $totalPost }}</h4>
                             </div>
                         </div>
                         <div class="col-4 row">
@@ -180,15 +180,14 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="grid masonry">
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
 
-        @foreach($medias as $item)
-        
+        @foreach ($medias as $item)
         <div class="grid-item">
             <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
                 @isset($item->image)
@@ -200,7 +199,8 @@
                     </video>
                 @endisset
                 <div class="fav">
-                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->media_id }}"></ion-icon>
+                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
+                        id="starIconTop_{{ $item->media_id }}"></ion-icon>
                 </div>
                 <div class="overlay">
                     <h2>
@@ -227,8 +227,8 @@
                             </ion-icon>
                         </a>
                         {{-- <a href="#" >
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a> --}}
+                        <ion-icon name="bookmark-outline"></ion-icon>
+                    </a> --}}
                     </div>
                     @isset($item->image)
                         <div class="dimension">
@@ -239,9 +239,8 @@
                 </div>
             </div>
         </div>
-    
     @endforeach
-</div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
@@ -432,51 +431,58 @@
                 <a href="" data-toggle="modal" data-target="#editprofileModal">Edit Profile</a>
             </li>
         </ul>
+    <div class="floatingButtonWrap">
+        <div class="floatingButtonInner">
+            <a href="#" class="floatingButton">
+                <i class="fa fa-plus icon-default"></i>
+            </a>
+            <ul class="floatingMenu">
+                <li>
+                    <a href="#">Your Media</a>
+                </li>
+                <li>
+                    <a href="#">Edit Profile</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 @endsection
 
 @section('script-bottom')
     <script>
-         $(document).ready(function(){
+        $(document).ready(function() {
             $('.floatingButton').on('click',
-            function(e){
-                e.preventDefault();
-                $(this).toggleClass('open');
-                if($(this).children('.fa').hasClass('fa-plus'))
-                {
-                    $(this).children('.fa').removeClass('fa-plus');
-                    $(this).children('.fa').addClass('fa-close');
-                } 
-                else if ($(this).children('.fa').hasClass('fa-close')) 
-                {
-                    $(this).children('.fa').removeClass('fa-close');
-                    $(this).children('.fa').addClass('fa-plus');
+                function(e) {
+                    e.preventDefault();
+                    $(this).toggleClass('open');
+                    if ($(this).children('.fa').hasClass('fa-plus')) {
+                        $(this).children('.fa').removeClass('fa-plus');
+                        $(this).children('.fa').addClass('fa-close');
+                    } else if ($(this).children('.fa').hasClass('fa-close')) {
+                        $(this).children('.fa').removeClass('fa-close');
+                        $(this).children('.fa').addClass('fa-plus');
+                    }
+                    $('.floatingMenu').stop().slideToggle();
                 }
-                $('.floatingMenu').stop().slideToggle();
-            }
-        );
-        $(this).on('click', function(e) {
-            var container = $(".floatingButton");
+            );
+            $(this).on('click', function(e) {
+                var container = $(".floatingButton");
 
-            // if the target of the click isn't the container nor a descendant of the container
-            if (!container.is(e.target) && $('.floatingButtonWrap').has(e.target).length === 0) 
-            {
-                if(container.hasClass('open'))
-                {
-                    container.removeClass('open');
+                // if the target of the click isn't the container nor a descendant of the container
+                if (!container.is(e.target) && $('.floatingButtonWrap').has(e.target).length === 0) {
+                    if (container.hasClass('open')) {
+                        container.removeClass('open');
+                    }
+                    if (container.children('.fa').hasClass('fa-close')) {
+                        container.children('.fa').removeClass('fa-close');
+                        container.children('.fa').addClass('fa-plus');
+                    }
+                    $('.floatingMenu').hide();
                 }
-                if (container.children('.fa').hasClass('fa-close')) 
-                {
-                    container.children('.fa').removeClass('fa-close');
-                    container.children('.fa').addClass('fa-plus');
-                }
-                $('.floatingMenu').hide();
-            }
+            });
         });
-    });
-    
-       const video = document.querySelector('video');
+
+        const video = document.querySelector('video');
 
         // init Masonry
         var $grid = $('.grid').masonry({
