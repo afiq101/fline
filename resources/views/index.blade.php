@@ -38,14 +38,14 @@
 @endsection
 
 @section('content')
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
-    </button>
+    </button> --}}
     <div class="grid masonry">
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img9.jpg') }}" alt="">
                 <div class="fav">
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/imggif1.gif') }}" alt="">
                 <div class="fav">
@@ -114,7 +114,7 @@
             </div>
 
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/imggif2.gif') }}" alt="">
                 <div class="overlay">
@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img6.jpg') }}" alt="">
                 <div class="overlay">
@@ -176,7 +176,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img3.jpg') }}" alt="">
                 <div class="overlay">
@@ -207,7 +207,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img7.jpg') }}" alt="">
                 <div class="overlay">
@@ -238,7 +238,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <video autoplay muted loop>
                     <source src="{{ asset('assets/images/media/vid2.mp4') }}" type="video/mp4">
@@ -275,7 +275,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img8.jpg') }}" alt="">
                 <div class="overlay">
@@ -306,7 +306,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img10.jpg') }}" alt="">
                 <div class="overlay">
@@ -337,7 +337,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
                 <div class="overlay">
@@ -368,7 +368,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <img class="img-responsive" src="{{ asset('assets/images/media/img12.jpg') }}" alt="">
                 <div class="overlay">
@@ -399,7 +399,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
             <div class="contain hovereffect">
                 <video autoplay muted loop>
                     <source src="{{ asset('assets/images/media/vid1.mp4') }}" type="video/mp4">
@@ -439,22 +439,27 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+    <!-- Dynamic Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body p-0">
                     <div class="ct-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h3 class="position-absolute" style="top:10px;left:10px">
-                            Kankei
-                        </h3>
-                        <a href="{{ asset('assets/images/media/imggif2.gif  ') }}" target="_blank">
-                            <img class="img-responsive" src="{{ asset('assets/images/media/imggif2.gif') }}" alt="">
+                        <div class="ct-header-title">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h3 class="position-absolute" style="top:10px;left:10px">
+                                Kaneki Ken
+                            </h3>
+                        </div>
+                        <a href="{{ asset('assets/images/media/img9.jpg') }}" id="link-modal" target="_blank">
+                            <img id="img-modal" class="img-responsive">
                         </a>
+                        <video autoplay muted loop>
+                            <source src="{{ asset('assets/images/media/vid2.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -471,6 +476,11 @@
                                         class="collapse">
                                         <div class="card-body p-3">
                                             <table>
+                                                <tr>
+                                                    <td style="width:100px">Uploaded by</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>Adi Iman</td>
+                                                </tr>
                                                 <tr>
                                                     <td style="width:100px">Description</td>
                                                     <td style="width:30px">:</td>
@@ -551,6 +561,19 @@
 
         video.addEventListener('loadeddata', (event) => {
             $grid.masonry('layout');
+        });
+
+        $(document).on("click", ".grid-item", function() {
+            var imagePath = $(this).children().find("img").attr("src");
+            if (typeof imagePath === 'undefined') {
+                console.log("viDE")
+                return;
+            } else {
+
+                $("#img-modal").prop("src", imagePath);
+                $("#link-modal").attr("href", imagePath);
+            }
+            // console.log(imagePath)
         });
     </script>
 @endsection
