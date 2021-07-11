@@ -45,398 +45,53 @@
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img9.jpg') }}" alt="">
-                <div class="fav">
-                    <ion-icon name="star"></ion-icon>
-                </div>
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
+        @foreach ($images as $item)
+            <div class="grid-item">
+                <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
+                    @isset($item->image)
+                        <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
+                    @else
+                        <video autoplay muted loop>
+                            <source src="{{ asset($item->full_path) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    @endisset
+                    <div class="fav">
+                        <ion-icon name="star"></ion-icon>
                     </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/imggif1.gif') }}" alt="">
-                <div class="fav">
-                    <ion-icon name="star"></ion-icon>
-                </div>
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
+                    <div class="overlay">
+                        <h2>
+                            {{ $item->title }}
 
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/imggif2.gif') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>1.5k</span>
+                            <div class="react">
+                                <ion-icon name="heart"></ion-icon>
+                                <span>2.3k</span>
+                            </div>
+                        </h2>
+                        <div class="icon">
+                            <a href="#">
+                                <ion-icon name="cloud-download-outline"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="star-outline"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="bookmark-outline"></ion-icon>
+                            </a>
                         </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img6.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img3.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img7.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <video autoplay muted loop>
-                    <source src="{{ asset('assets/images/media/vid2.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="fav">
-                    <ion-icon name="star"></ion-icon>
-                </div>
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img8.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img10.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/img12.jpg') }}" alt="">
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item" data-toggle="modal" data-target="#imageModal">
-            <div class="contain hovereffect">
-                <video autoplay muted loop>
-                    <source src="{{ asset('assets/images/media/vid1.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                        @isset($item->image)
+                            <div class="dimension">
+                                {{ $item->image->width }} * {{ $item->image->height }}
+                            </div>
+                        @endisset
 
-                <div class="fav">
-                    <ion-icon name="star"></ion-icon>
-                </div>
-                <div class="overlay">
-                    <h2>
-                        Title
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span>2.3k</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a>
-                    </div>
-                    <div class="dimension">
-                        1920x1080
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 
     <!-- Dynamic Modal -->
