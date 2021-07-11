@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Fline</title>
     @include('layouts.head')
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -26,6 +28,7 @@
 
     <!-- JAVASCRIPT -->
     @include('layouts.footer-script')
+    @stack('script')
 </body>
 
 </html>

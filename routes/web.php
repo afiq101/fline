@@ -20,6 +20,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/comment/{mid}', 'CommentController@displayComment');
+});
 Route::get('/profile', 'ProfileController@profile')->name('profile');
 
 Route::resource('like', 'UserLikeController');
