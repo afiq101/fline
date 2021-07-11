@@ -12,6 +12,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $medias = Media::join('user_likes', 'user_likes.media_id','=','medias.id')->where('user_likes.user_id', Auth::id())->get();
-        return view('profile', compact('medias'));
+        $totalPost = Media::where('userid', Auth::id())->count();
+        return view('profile', compact('medias','totalPost'));
     }
 }

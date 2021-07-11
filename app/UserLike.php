@@ -19,4 +19,6 @@ class UserLike extends Model
     {
         return $this->belongsTo(Media::class);
     }
+
+    
 }

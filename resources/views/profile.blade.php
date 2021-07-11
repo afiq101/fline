@@ -157,7 +157,7 @@
                                 <h4>Post</h4>
                             </div>
                             <div class="col-12">
-                                <h4>20</h4>
+                                <h4>{{$totalPost}}</h4>
                             </div>
                         </div>
                         <div class="col-4 row">
