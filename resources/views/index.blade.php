@@ -38,8 +38,6 @@
 @endsection
 
 @section('content')
-    {{ $images->first() }}
-
     {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
     </button> --}}
