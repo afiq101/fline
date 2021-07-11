@@ -453,18 +453,19 @@
             <div class="modal-content">
                 <div class="modal-body mb-3 p-0">
                     <div class="ct-header">
-                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button> --}}
-                        <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
+                        </button>
+                        <a href="{{ asset('assets/images/media/img11.jpg') }}" target="_blank">
+                            <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
+                        </a>
                     </div>
                     <div class="row mt-2 ml-1">
                         <div class="col-12">
-                            <h3>Title
-                                <div class="float-right mr-2">
-                                    Upload by <span class="text-bold"> Adi</span>
-                                </div>
-                            </h3>
+                            <h3 class="mb-0">Kakashi</h3>
+                        </div>
+                        <div class="col-12 mb-3" style="font-size:12px">
+                            Upload by <span class="text-bold"> Adi</span>
                         </div>
                         <div class="col-12">
                             <table>
@@ -474,18 +475,33 @@
                                     <td>test/img</td>
                                 </tr>
                                 <tr>
+                                    <td style="width:100px">Extension</td>
+                                    <td style="width:30px">:</td>
+                                    <td>.jpg</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:100px">Path</td>
+                                    <td style="width:30px">:</td>
+                                    <td>fline.test/images/001.jpg</td>
+                                </tr>
+                                <tr>
                                     <td style="width:100px">Upload Date</td>
                                     <td style="width:30px">:</td>
                                     <td>29/02/2021</td>
                                 </tr>
-                                <tr></tr>
+                                <tr>
+                                    <td style="width:100px">Resolution</td>
+                                    <td style="width:30px">:</td>
+                                    <td>1920 x 1080</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:100px">Duration</td>
+                                    <td style="width:30px">:</td>
+                                    <td>2.30 min</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                 </div>
             </div>
         </div>
