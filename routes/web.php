@@ -27,7 +27,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', 'ProfileController@profile');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('Media')->prefix('Media')->name('Media.')->group(function(){
+Route::resource('/Media','MediaController');
+});
+
+Route::get('/Media/destroy/{id}', 'Media\MediaController@destroy');
+Route::get('/Media/edit/{id}', 'Media\MediaController@edit');
+Route::post('/Media/upload', 'Media\MediaController@update');
 
 Route::resource('like', 'UserLikeController');
 Route::resource('star', 'UserStarController');
+
