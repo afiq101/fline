@@ -133,33 +133,46 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid rounded p-3" style="max-width: 488px; width: 100%;background-color:fff">
-        <div class="d-flex flex-column">
-            <div class="contain hovereffect d-flex justify-content-center p-3">
-                <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
-            </div>
-                <div class="p-5 text-center">
-                    <div class="col-12">
-                        <h3>{{auth()->user()->name}}
-                        </h3>
-                    </div>
-                    <!-- <div class="col-12">
-                        <table>
-                            <tr>
-                                <td style="width:100px">Description</td>
-                                <td style="width:30px">:</td>
-                                <td>test/img</td>
-                            </tr>
-                            <tr>
-                                <td style="width:100px">Upload Date</td>
-                                <td style="width:30px">:</td>
-                                <td>29/02/2021</td>
-                            </tr>
-                            <tr></tr>
-                        </table>
-                    </div> -->
+    <div class="container-fluid rounded p-3" style="background-color: #1f1f1f">
+        <div class="container" style="max-width: 488px; width: 100%;">
+            <div class="d-flex flex-column">
+                <div class="contain hovereffect d-flex justify-content-center p-3">
+                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
                 </div>
+                <div class="p-3 text-center row justify-content-center">
+                    <div class="col-12">
+                        <h3>{{auth()->user()->name}}</h3>
+                    </div>
+                    <div class="col-12 text-center row p-3 justify-content-center" style="color: #636b6f">
+                        <div class="col-md-4 row" >
+                            <div class="col-12">
+                                <h4>Like</h4>
+                            </div>
+                            <div class="col-12">
+                                <h4>12</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row" >
+                            <div class="col-12">
+                                <h4>Favourite</h4>
+                            </div>
+                            <div class="col-12">
+                                <h4>20</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <div class="col-12">
+                                <h4>Post</h4>
+                            </div>
+                            <div class="col-12">
+                                <h4>5</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div>
     <div class="grid masonry">
         <!-- .grid-sizer empty element, only used for element sizing -->
