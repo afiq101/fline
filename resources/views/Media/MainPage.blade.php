@@ -83,36 +83,30 @@
 <button style="float: right;">Insert</button>
 </a>
     <div class="grid masonry">
-        <button>Insert</button>
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
-        <div class="grid-item">
-            <div class="contain">
-                <a href="#">
-                <img src="{{ asset('assets/images/picture/img1.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img2.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img3.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img4.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="contain">
-                <img src="{{ asset('assets/images/picture/img5.jpg') }}" alt="">
-            </div>
-        </div>
+        <?php foreach ($userMedia as $key => $value) { ?>
+                <div class="grid-item">
+                    <div class="contain">
+                        <?php 
+                        $extension = explode('.' , $value->path)[1];
+                        if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") { ?>
+                                <video width="300" height="200" controls src="http://localhost:8000/assets/Media/<?= $value->path ?>" ></vidoe>
+                            <?php } else { ?>
+                                <img width="300" height="200" src="http://localhost:8000/assets/Media/<?= $value->path ?>" alt="">
+                        <?php } ?>
+                    </div>
+                    <a href="http://localhost:8000/Media/edit/<?= $value->id ?>">
+                        <button class="btn btn-success">Update</button>
+                    </a>
+                    <a href="http://localhost:8000/Media/destroy/<?= $value->id ?>">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
+                    <br>
+                </div> 
+        <?php } ?>
+
     </div>
 @endsection
 

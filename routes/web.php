@@ -29,4 +29,8 @@ Route::namespace('Media')->prefix('Media')->name('Media.')->group(function(){
 Route::resource('/Media','MediaController');
 });
 
+Route::get('/Media/destroy/{id}', 'Media\MediaController@destroy');
+Route::get('/Media/edit/{id}', 'Media\MediaController@edit');
+Route::post('/Media/upload', 'Media\MediaController@update');
+
 

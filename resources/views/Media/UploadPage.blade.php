@@ -39,8 +39,7 @@
                     
                     <div class="form-group row">
                     <label for="file" class="col-md-3 col-form-label text-md-right"></label>
-                        <div class="col-md-6">
-                            <img id="previewImg" width="300" height="200"></img>
+                        <div id="preview" class="col-md-6">
                         </div>
                     </div>
                     
@@ -61,8 +60,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     function previewFile(input){
+        $( "#previewImg" ).remove();
         var file = $("input[type=file]").get(0).files[0];
-        
+        console.log(file.type.split('/')[0]);
+        if(file.type.split('/')[0] == 'image')
+            $("#preview").append('<img id="previewImg" width="300" height="200"></img>');
+        else if(file.type.split('/')[0] == 'video')
+            $("#preview").append('<video controls id="previewImg" width="300" height="200"></video>');
+
         if(file){
             var reader = new FileReader();
             
