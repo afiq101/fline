@@ -2,12 +2,21 @@
 
 use App\Image;
 use App\Media;
+use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        User::create([
+            'name' => 'user dev',
+            'email' => 'user@dev.com',
+            'password' => Hash::make('user')
+        ]);
+
+        // Insert preloaded photos
         $path = 'public/assets/images/media';
         $dir = new FilesystemIterator($path);
 

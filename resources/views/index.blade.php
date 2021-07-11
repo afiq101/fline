@@ -71,8 +71,8 @@
                             <a href="#">
                                 <ion-icon name="cloud-download-outline"></ion-icon>
                             </a>
-                            <a href="#">
-                                <ion-icon name="heart-outline"></ion-icon>
+                            <a href="#" onclick="onLikeMedia({{ $item->id }})">
+                                <ion-icon name="heart-outline" id="likeIcon_{{ $item->id }}"></ion-icon>
                             </a>
                             <a href="#">
                                 <ion-icon name="star-outline"></ion-icon>
@@ -233,5 +233,23 @@
 
             $("#title-modal").text(title)
         });
+
+        // Like Media Script
+
+        async function onLikeMedia(id) {
+            var res = await axios.post('{{ route('like.store') }}', {
+                media_id: id
+            });
+
+            var data = res.data;
+
+            if (data.status == 1){
+                $('#likeIcon_' + data.media_id).attr('name','heart');
+            }
+
+            else if (data.status == 0){
+                $('#likeIcon_' + data.media_id).attr('name','heart-outline');
+            }
+        }
     </script>
 @endsection
