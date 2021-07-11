@@ -36,14 +36,42 @@
 
             .grid-sizer,
             .grid-item {
-                width: 22%;
+                width: 30%;
                 margin-bottom: 20px;
             }
 
             .gutter-sizer {
-                width: 4%;
+                width: 5%;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+
+            .grid-sizer,
+            .grid-item {
+                width: 49%;
+                margin-bottom: 20px;
             }
 
+            .gutter-sizer {
+                width: 2%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .masonry {
+                width: 90%;
+            }
+
+            .grid-sizer,
+            .grid-item {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .gutter-sizer {
+                width: 0%;
+            }
         }
 
     </style>
