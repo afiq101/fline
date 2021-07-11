@@ -53,7 +53,7 @@
 
                         <br>
                         <br>
-                        <b>Comments</b>
+                        <b>Comments ({{$comments->count()}})</b>
                         <br>
                         <input id="commentInp" type="text" placeholder="Add comment..." class="form-control mt-2 mb-2">
                         <div class="scroll" style="overflow-y: auto; height: 25vw;">

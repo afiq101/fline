@@ -14,7 +14,7 @@ class Media extends Model
     ];
 
     protected $appends = [
-        'full_path', 'like_count', 'user_star', 'user_like'
+        'full_path', 'like_count', 'user_star', 'user_like', 'user_comment'
     ];
 
     public function getFullPathAttribute()
@@ -25,6 +25,11 @@ class Media extends Model
     public function getLikeCountAttribute()
     {
         return $this->userLike()->count();
+    }
+
+    public function getUserCommentAttribute()
+    {
+        return $this->userComment()->count();
     }
 
     public function getUserStarAttribute()
@@ -55,6 +60,10 @@ class Media extends Model
     public function userStar()
     {
         return $this->hasMany(UserStar::class, 'media_id');
+    }
+
+    public function userComment() {
+        return $this->hasMany(UserComment::class, 'media_id');
     }
 
     public function image()
