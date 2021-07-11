@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Media;
-use App\UserLike;
+use App\UserStar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class UserLikeController extends Controller
+class UserStarController extends Controller
 {
     public function __construct()
     {
@@ -18,7 +17,6 @@ class UserLikeController extends Controller
     public function index()
     {
         $user = Auth::user();
-
     }
 
     public function store(Request $request)
@@ -29,29 +27,25 @@ class UserLikeController extends Controller
 
         $user = Auth::user();
 
-        $hasLiked = $user->userLike()->where('media_id', $validated->media_id)->first();
+        $hasStar = $user->userStar()->where('media_id', $validated->media_id)->first();
 
-        if (isset($hasLiked)) {
-            return $this->destroy($hasLiked->id);
+        if (isset($hasStar)) {
+            return $this->destroy($hasStar->id);
         }
 
-        $user->userLike()->create([
+        $user->userStar()->create([
             'media_id' => $validated->media_id
         ]);
 
-        $likes = UserLike::where('media_id', $validated->media_id)->count();
-
-        return response(['status' => 1, 'media_id' => $validated->media_id, 'like_count' => $likes]);
+        return response(['status' => 1, 'media_id' => $validated->media_id]);
     }
 
     public function destroy($id)
     {
         $user = Auth::user();
-        $media = $user->userLike()->find($id);
+        $media = $user->userStar()->find($id);
         $media->delete();
 
-        $likes = UserLike::where('media_id', $media->media_id)->count();
-
-        return response(['status' => 0, 'media_id' => $media->media_id, 'like_count' => $likes]);
+        return response(['status' => 0, 'media_id' => $media->media_id]);
     }
 }

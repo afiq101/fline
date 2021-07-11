@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@profile')->name('profile');
 
 Route::resource('like', 'UserLikeController');
+Route::resource('star', 'UserStarController');

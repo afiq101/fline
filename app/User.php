@@ -37,12 +37,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function UserLike()
+    public function userLike()
     {
         return $this->hasMany(UserLike::class, 'user_id');
     }
 
-    public function UserStar()
+    public function userStar()
     {
         return $this->hasMany(UserStar::class, 'user_id');
     }
