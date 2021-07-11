@@ -28,10 +28,26 @@
             vertical-align: middle;
         }
 
+        .ct-header {
+            width: 100%;
+            height: 200px;
+        }
+
+        .ct-header img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
     </style>
 @endsection
 
 @section('content')
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+    </button>
     <div class="grid masonry">
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
@@ -169,7 +185,7 @@
         </div>
         <div class="grid-item">
             <div class="contain hovereffect">
-                <img class="img-responsive" src="{{ asset('assets/images/media/imggif3.gif') }}" alt="">
+                <img class="img-responsive" src="{{ asset('assets/images/media/img3.jpg') }}" alt="">
                 <div class="overlay">
                     <h2>
                         Title
@@ -430,6 +446,50 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body mb-3 p-0">
+                    <div class="ct-header">
+                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> --}}
+                        <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
+                    </div>
+                    <div class="row mt-2 ml-1">
+                        <div class="col-12">
+                            <h3>Title
+                                <div class="float-right mr-2">
+                                    Upload by <span class="text-bold"> Adi</span>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="col-12">
+                            <table>
+                                <tr>
+                                    <td style="width:100px">Description</td>
+                                    <td style="width:30px">:</td>
+                                    <td>test/img</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:100px">Upload Date</td>
+                                    <td style="width:30px">:</td>
+                                    <td>29/02/2021</td>
+                                </tr>
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script-bottom')
@@ -449,19 +509,9 @@
                 queue: false
             }
         });
-        // layout Masonry after each image loads
-        // $grid.imagesLoaded().progress(function() {
-        //     $grid.masonry('layout');
-        // });
 
         video.addEventListener('loadeddata', (event) => {
-            console.log('Yay! The readyState just increased to  ' +
-                'HAVE_CURRENT_DATA or greater for the first time.');
             $grid.masonry('layout');
         });
-
-        // $grid.on('.grid video', function() {
-        //     $grid.masonry('layout');
-        // });
     </script>
 @endsection
