@@ -41,7 +41,7 @@ class MediaController extends Controller
     {
         if($request->hasFile('file'))
             {
-                $date = Carbon::now();
+                $date = Carbon::now()->format('Y-m-d');
                 
                 $fileNameToStore = $request->file->hashName();
 
@@ -58,12 +58,16 @@ class MediaController extends Controller
                     $duration = date('H:i:s.v', $fileinfo['playtime_seconds']);
                 }
 
-                else
+                else if($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif")
                 {
                     $data = getimagesize($file);
                     $width = $data[0];
                     $height = $data[1];
+                }
 
+                else
+                {
+                    return view('Media.UploadPage')->with('failed','Please Insert The Right Format .');
                 }
 
                 //$pid = Auth::id();
@@ -72,29 +76,29 @@ class MediaController extends Controller
 
                 $file->move("assets/Media/", $fileNameToStore);
 
-                $id = DB::table('media')->insertGetId([
-                    'Title' => $request->name,
-                    'Extension' => $extension,
-                    'Description' => $request->desc,
-                    'file_path' => $fileNameToStore,
-                    'Size' => $fileSize,
-                    'UserID' => $pid,
-                    'created_at' => $date
+                $id = DB::table('medias')->insertGetId([
+                    'title' => $request->name,
+                    'extension' => $extension,
+                    'description' => $request->desc,
+                    'path' => $fileNameToStore,
+                    'size' => $fileSize,
+                    'userid' => $pid,
+                    'dateuploaded' => $date
                 ]);
 
                 if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
                 {
-                    DB::table('video')->insert([
-                        'Duration' => $duration,
-                        'MediaID' => $id
+                    DB::table('videos')->insert([
+                        'duration' => $duration,
+                        'mediaid' => $id
                     ]);
                 }
-                else
+                else if($extension == "jpeg" || $extension == "jpg" || $extension == "png" || $extension == "gif")
                 {
-                    DB::table('image')->insert([
-                        'Width' => $width,
-                        'Height' => $height,
-                        'MediaID' => $id
+                    DB::table('images')->insert([
+                        'width' => $width,
+                        'height' => $height,
+                        'mediaid' => $id
                     ]);
                 }
                 

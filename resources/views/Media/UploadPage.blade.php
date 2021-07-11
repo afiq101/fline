@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@if(!empty($failed))
+  <div class="alert alert-success"> {{ $failed }}</div>
+@endif
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -24,7 +28,7 @@
                     <div class="form-group row">
                     <label for="name" class="col-md-3 col-form-label text-md-right">Description</label>
                         <div class="col-md-6">
-                            <input id="desc" type="text" class="form-control" name="desc" value="" required autofocus>
+                            <input id="desc" type="text" class="form-control" name="desc" value=""  autofocus>
                         </div>
                     </div>
                     
