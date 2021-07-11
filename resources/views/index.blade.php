@@ -28,6 +28,12 @@
             vertical-align: middle;
         }
 
+        .dp {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
     </style>
 @endsection
 
@@ -436,57 +442,87 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-body mb-3 p-0">
+                <div class="modal-body p-0">
                     <div class="ct-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <a href="{{ asset('assets/images/media/img11.jpg') }}" target="_blank">
-                            <img class="img-responsive" src="{{ asset('assets/images/media/img11.jpg') }}" alt="">
+                        <h3 class="position-absolute" style="top:10px;left:10px">
+                            Kankei
+                        </h3>
+                        <a href="{{ asset('assets/images/media/imggif2.gif  ') }}" target="_blank">
+                            <img class="img-responsive" src="{{ asset('assets/images/media/imggif2.gif') }}" alt="">
                         </a>
                     </div>
-                    <div class="row mt-2 ml-1">
-                        <div class="col-12">
-                            <h3 class="mb-0">Kakashi</h3>
-                        </div>
-                        <div class="col-12 mb-3" style="font-size:12px">
-                            Upload by <span class="text-bold"> Adi</span>
-                        </div>
-                        <div class="col-12">
-                            <table>
-                                <tr>
-                                    <td style="width:100px">Description</td>
-                                    <td style="width:30px">:</td>
-                                    <td>test/img</td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100px">Extension</td>
-                                    <td style="width:30px">:</td>
-                                    <td>.jpg</td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100px">Path</td>
-                                    <td style="width:30px">:</td>
-                                    <td>fline.test/images/001.jpg</td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100px">Upload Date</td>
-                                    <td style="width:30px">:</td>
-                                    <td>29/02/2021</td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100px">Resolution</td>
-                                    <td style="width:30px">:</td>
-                                    <td>1920 x 1080</td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100px">Duration</td>
-                                    <td style="width:30px">:</td>
-                                    <td>2.30 min</td>
-                                </tr>
-                            </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="accordionModal" class="accordion shadow">
+                                <!-- Accordion item 1 -->
+                                <div class="card">
+                                    <div id="headingOne" class="card-header bg-white shadow-sm border-0">
+                                        <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                                class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Details</a>
+                                        </h6>
+                                    </div>
+                                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionModal"
+                                        class="collapse">
+                                        <div class="card-body p-3">
+                                            <table>
+                                                <tr>
+                                                    <td style="width:100px">Description</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>test/img</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100px">Extension</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>.jpg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100px">Path</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>fline.test/images/001.jpg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100px">Upload Date</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>29/02/2021</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100px">Resolution</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>1920 x 1080</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:100px">Duration</td>
+                                                    <td style="width:30px">:</td>
+                                                    <td>2.30 min</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    {{-- <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+                                        <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
+                                                class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment</a>
+                                        </h6>
+                                    </div>
+                                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionModal"
+                                        class="collapse">
+                                        <div class="row p-3">
+                                            <div class="col-3">
+                                                <img class="dp" src="{{ asset('assets/images/profile/user001.jpg') }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="col-5"></div>
+                                            <div class="col-4"></div>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
