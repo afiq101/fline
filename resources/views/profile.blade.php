@@ -349,16 +349,19 @@
                   </div>
                 <div class="modal-body p-3">
                     <div class="row justify-content-center">
-                        <div class="contain hovereffect d-flex justify-content-center p-5">
-                            @isset(auth()->user()->userimage)
-                            <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
-                            @else
-                            <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/default-photo.png')}}" alt="">
-                            @endisset
-                        </div>
+                        
                         <div class="col-md-12">
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="/updateprofile" enctype="multipart/form-data">
                                 @csrf
+                                {{ method_field('PUT') }}
+                                <div class="contain hovereffect d-flex justify-content-center p-5">
+                                    @isset(auth()->user()->userimage)
+                                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
+                                    @else
+                                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/default-photo.png')}}" alt="">
+                                    @endisset
+                                    <input type="file" name="userimage" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" />
+                                </div>
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
         
@@ -387,7 +390,7 @@
                                     </div>
                                 </div>
         
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
         
                                     <div class="col-md-6">
@@ -407,7 +410,7 @@
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     </div>
-                                </div>
+                                </div> --}}
         
                                 <div class="form-group row mb-0 p-2">
                                     <div class="col-md-12" style="width: 100%">

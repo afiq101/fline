@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/comment/{mid}', 'CommentController@displayComment');
     Route::get('/profile', 'ProfileController@profile');
+    Route::put('/updateprofile', 'ProfileController@updateprofile');
 });
 
 
