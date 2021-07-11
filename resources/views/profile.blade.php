@@ -133,7 +133,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid rounded p-3" style="max-width: 488px; width: 100%;">
+    <div class="container-fluid rounded p-3" style="max-width: 488px; width: 100%;background-color:fff">
         <div class="d-flex flex-column">
             <div class="contain hovereffect d-flex justify-content-center p-3">
                 <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
