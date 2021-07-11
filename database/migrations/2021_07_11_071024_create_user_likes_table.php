@@ -33,3 +33,4 @@ class CreateUserLikesTable extends Migration
         Schema::dropIfExists('user_likes');
     }
 }
+
