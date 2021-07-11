@@ -11,8 +11,7 @@ class ProfileController extends Controller
 {
     public function profile()
     {
-        $medias = UserLike::where('user_id', Auth::id())->join('medias','medias.id','=','user_likes.media_id')
-        ->get();
+        $medias = Media::join('user_likes', 'user_likes.media_id','=','medias.id')->where('user_likes.user_id', Auth::id())->get();
         return view('profile', compact('medias'));
     }
 }
