@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserLikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('like', UserLikeController::class);
+Route::resource('like', 'UserLikeController');
