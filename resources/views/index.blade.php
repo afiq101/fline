@@ -38,6 +38,8 @@
 @endsection
 
 @section('content')
+    {{ $images->first() }}
+
     {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
     </button> --}}
@@ -46,6 +48,7 @@
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
         @foreach ($images as $item)
+
             <div class="grid-item">
                 <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
                     @isset($item->image)
@@ -57,7 +60,7 @@
                         </video>
                     @endisset
                     <div class="fav">
-                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->id }}"></ion-icon>
                     </div>
                     <div class="overlay">
                         <h2>
@@ -72,14 +75,20 @@
                                 <ion-icon name="cloud-download-outline"></ion-icon>
                             </a>
                             <a href="#" onclick="onLikeMedia({{ $item->id }})">
-                                <ion-icon name="heart-outline" id="likeIcon_{{ $item->id }}"></ion-icon>
+                            <ion-icon @if ($item->user_like) name="heart" @else
+                                        name="heart-outline" @endif
+                                    id="likeIcon_{{ $item->id }}">
+                                </ion-icon>
                             </a>
-                            <a href="#">
-                                <ion-icon name="star-outline"></ion-icon>
+                            <a href="#" onclick="onStarMedia({{ $item->id }})">
+                            <ion-icon @if ($item->user_star) name="star" @else
+                                        name="star-outline" @endif
+                                    id="starIcon_{{ $item->id }}">
+                                </ion-icon>
                             </a>
-                            <a href="#">
+                            {{-- <a href="#" >
                                 <ion-icon name="bookmark-outline"></ion-icon>
-                            </a>
+                            </a> --}}
                         </div>
                         @isset($item->image)
                             <div class="dimension">
@@ -233,7 +242,6 @@
         });
 
         // Like Media Script
-
         async function onLikeMedia(id) {
             var res = await axios.post('{{ route('like.store') }}', {
                 media_id: id
@@ -241,15 +249,31 @@
 
             var data = res.data;
 
-            if (data.status == 1){
-                $('#likeIcon_' + data.media_id).attr('name','heart');
+            if (data.status == 1) {
+                $('#likeIcon_' + data.media_id).attr('name', 'heart');
+            } else if (data.status == 0) {
+                $('#likeIcon_' + data.media_id).attr('name', 'heart-outline');
             }
 
-            else if (data.status == 0){
-                $('#likeIcon_' + data.media_id).attr('name','heart-outline');
-            }
+            $('#likeCount_' + data.media_id).html(data.like_count);
+        }
 
-            $('#likeCount_'+ data.media_id).html(data.like_count);
+        // Star Media Script
+        async function onStarMedia(id) {
+            var res = await axios.post('{{ route('star.store') }}', {
+                media_id: id
+            });
+
+            var data = res.data;
+            console.log(data);
+            if (data.status == 1) {
+                $('#starIcon_' + data.media_id).attr('name', 'star');
+                $('#starIconTop_' + data.media_id).show();
+
+            } else if (data.status == 0) {
+                $('#starIcon_' + data.media_id).attr('name', 'star-outline');
+                $('#starIconTop_' + data.media_id).hide();
+            }
         }
     </script>
 @endsection
