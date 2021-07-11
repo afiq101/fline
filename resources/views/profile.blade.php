@@ -192,30 +192,30 @@
                     </video>
                 @endisset
                 <div class="fav">
-                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->id }}"></ion-icon>
+                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->media_id }}"></ion-icon>
                 </div>
                 <div class="overlay">
                     <h2>
                         <span>{{ $item->title }}</span>
                         <div class="react">
                             <ion-icon name="heart"></ion-icon>
-                            <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
+                            <span id="likeCount_{{ $item->media_id }}">{{ $item->like_count }}</span>
                         </div>
                     </h2>
                     <div class="icon">
                         <a href="#">
                             <ion-icon name="cloud-download-outline"></ion-icon>
                         </a>
-                        <a href="#" onclick="onLikeMedia({{ $item->id }})">
+                        <a href="#" onclick="onLikeMedia({{ $item->media_id }})">
                         <ion-icon @if ($item->user_like) name="heart" @else
                                     name="heart-outline" @endif
-                                id="likeIcon_{{ $item->id }}">
+                                id="likeIcon_{{ $item->media_id }}">
                             </ion-icon>
                         </a>
-                        <a href="#" onclick="onStarMedia({{ $item->id }})">
+                        <a href="#" onclick="onStarMedia({{ $item->media_id }})">
                         <ion-icon @if ($item->user_star) name="star" @else
                                     name="star-outline" @endif
-                                id="starIcon_{{ $item->id }}">
+                                id="starIcon_{{ $item->media_id }}">
                             </ion-icon>
                         </a>
                         {{-- <a href="#" >
