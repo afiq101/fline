@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/logo/fav-icon.png') }}">
     <title>Fline</title>
     @include('layouts.head')
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -25,6 +27,7 @@
 
     <!-- JAVASCRIPT -->
     @include('layouts.footer-script')
+    @stack('script')
 </body>
 
 </html>
