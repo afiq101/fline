@@ -17,7 +17,7 @@ This Application is developed in fulfilment of Mini Project of BITP3353 DATABASE
 - [Faris Izwan](https://github.com/Faris37)
 
 ## Repository
-The official repository of this project is stored in [Github](https://github.com/afiq101/fline)
+The official repository of this project is hosted under Afiq Iskandar's [Github](https://github.com/afiq101/fline)
 
 ## Tech Stacks
 The application utilizes the following Tech Stacks: 
