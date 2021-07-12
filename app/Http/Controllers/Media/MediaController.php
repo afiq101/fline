@@ -208,12 +208,13 @@ class MediaController extends Controller
                     'height' => $height
                 ]);
             }
-            $getUserMedia = DB::table('medias')
-            ->where('userid', '=', Auth::id())
-            ->get();
-            return view('Media.MainPage', ['userMedia' => $getUserMedia]);
+           
         
         }
+        $getUserMedia = DB::table('medias')
+        ->where('userid', '=', Auth::id())
+        ->get();
+        return view('Media.MainPage', ['userMedia' => $getUserMedia]);
     }
 
     /**
