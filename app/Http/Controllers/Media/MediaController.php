@@ -213,6 +213,8 @@ class MediaController extends Controller
         DB::table('images')->where('mediaid', '=', $id)->delete();
         DB::table('videos')->where('mediaid', '=', $id)->delete();
         DB::table('user_likes')->where('media_id', '=', $id)->delete();
+        DB::table('user_stars')->where('media_id', '=', $id)->delete();
+        DB::table('user_comments')->where('media_id', '=', $id)->delete();
         DB::table('medias')->where('id', '=', $id)->delete();
         // return $this->index();
         return redirect('/manage');

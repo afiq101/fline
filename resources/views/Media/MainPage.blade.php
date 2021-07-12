@@ -23,7 +23,7 @@
                             <?php 
                                 $extension = explode('.' , $value->path)[1];
                                 if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") { ?>
-                            <video controls autoplay>
+                            <video controls autoplay muted loop>
                                 <source src="{{ asset('assets/images/media/' . $value->path) }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>

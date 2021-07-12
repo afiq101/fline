@@ -12,15 +12,38 @@ class ProfileController extends Controller
 {
     public function profile()
     {
-        $data = Auth::user()->userLike()->get();
+        $data = Auth::user()->userStar()->get();
         $medias = $data->map(function ($item, $key) {
+            return $item->media;
+        });
+
+        $data2 = Auth::user()->userLike()->get();
+        $mediasLike = $data2->map(function ($item, $key) {
             return $item->media;
         });
 
         // $medias = Media::join('user_likes', 'user_likes.media_id','=','medias.id')->where('user_likes.user_id', Auth::id())->get();
 
         $totalPost = Media::where('userid', Auth::id())->count();
-        return view('profile', compact('medias', 'totalPost'));
+        return view('profile', compact('medias', 'mediasLike', 'totalPost'));
+    }
+
+    public function profileLike()
+    {
+        $data = Auth::user()->userStar()->get();
+        $medias = $data->map(function ($item, $key) {
+            return $item->media;
+        });
+
+        $data2 = Auth::user()->userLike()->get();
+        $mediasLike = $data2->map(function ($item, $key) {
+            return $item->media;
+        });
+
+        // $medias = Media::join('user_likes', 'user_likes.media_id','=','medias.id')->where('user_likes.user_id', Auth::id())->get();
+
+        $totalPost = Media::where('userid', Auth::id())->count();
+        return view('profilelike', compact('medias', 'mediasLike', 'totalPost'));
     }
 
     public function updateprofile(Request $request) 
