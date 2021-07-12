@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <?php $value = $updateMedia[0] ?>
-                    <form action="/Media/upload" method="POST" enctype="multipart/form-data">
+                    <form action="/manage/upload" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                     <label for="name" class="col-md-3 col-form-label text-md-right">Title</label>
@@ -89,7 +89,7 @@
             else
                 $("#preview").append('<img id="previewImg" width="300" height="200"></img>');
             console.log(file);
-            $("#previewImg").attr("src", `{{ asset('assets/Media/${file}')}}`);
+            $("#previewImg").attr("src", `{{ asset('assets/images/media/${file}')}}`);
     }
 
     setTimeout(() => {

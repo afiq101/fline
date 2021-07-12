@@ -35,13 +35,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::namespace('Media')->prefix('Media')->name('Media.')->group(function(){
-Route::resource('/Media','MediaController');
-});
-
-Route::get('/Media/destroy/{id}', 'Media\MediaController@destroy');
-Route::get('/Media/edit/{id}', 'Media\MediaController@edit');
-Route::post('/Media/upload', 'Media\MediaController@update');
+// Route::namespace('Media')->prefix('manage')->name('Media.')->group(function(){
+//     Route::resource('/Media','MediaController');
+// });
+Route::get('/manage', 'Media\MediaController@index');
+Route::get('/manage/add', 'Media\MediaController@create');
+Route::post('/manage/save', 'Media\MediaController@store');
+Route::get('/manage/destroy/{id}', 'Media\MediaController@destroy');
+Route::get('/manage/edit/{id}', 'Media\MediaController@edit');
+Route::post('/manage/upload', 'Media\MediaController@update');
 
 Route::resource('like', 'UserLikeController');
 Route::resource('star', 'UserStarController');
