@@ -19,6 +19,7 @@ This Application is developed in fulfilment of Mini Project of BITP3353 DATABASE
 ## Repository
 The official repository of this project is hosted under Afiq Iskandar's [Github](https://github.com/afiq101/fline)
 
+
 ## Tech Stacks
 The application utilizes the following Tech Stacks: 
 - [Laravel 7](https://laravel.com/docs/7.x)
@@ -35,3 +36,8 @@ The application utilizes the following Tech Stacks:
 ```
 coming soon
 ```
+
+## Instruction to Deploy
+1. Ensure that your server met the requirements needed to deploy Laravel 7 applications
+2. Clone this repository
+3. execute ```composer install``` command
