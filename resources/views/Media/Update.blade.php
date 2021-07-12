@@ -88,10 +88,11 @@
                     $("#preview").append('<video controls id="previewImg" width="300" height="200"></video>');
             else
                 $("#preview").append('<img id="previewImg" width="300" height="200"></img>');
-            $("#previewImg").attr("src", `http://localhost:8000/assets/Media/${file}`);
+            console.log(file);
+            $("#previewImg").attr("src", `{{ asset('assets/Media/${file}')}}`);
     }
 
     setTimeout(() => {
         loadPreview()
-    }, 1000);
+    }, 3000);
 </script>

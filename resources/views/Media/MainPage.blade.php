@@ -86,26 +86,26 @@
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
-        <?php foreach ($userMedia as $key => $value) { ?>
+        @foreach ($userMedia as $key => $value) 
                 <div class="grid-item">
                     <div class="contain">
                         <?php 
                         $extension = explode('.' , $value->path)[1];
                         if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") { ?>
-                                <video width="300" height="200" controls src="http://localhost:8000/assets/Media/<?= $value->path ?>" ></vidoe>
+                                <video width="300" height="200" controls src="{{ asset('assets/Media/' . $value->path) }}" ></vidoe>
                             <?php } else { ?>
-                                <img width="300" height="200" src="http://localhost:8000/assets/Media/<?= $value->path ?>" alt="">
+                                <img width="300" height="200" src="{{ asset('assets/Media/' . $value->path) }}" alt="">
                         <?php } ?>
                     </div>
-                    <a href="http://localhost:8000/Media/edit/<?= $value->id ?>">
+                    <a href="{{ URL::to('Media/edit/' . $value->id) }}">
                         <button class="btn btn-success">Update</button>
                     </a>
-                    <a href="http://localhost:8000/Media/destroy/<?= $value->id ?>">
+                    <a href="{{ URL::to('Media/destroy/' . $value->id) }}">
                         <button class="btn btn-danger">Delete</button>
                     </a>
                     <br>
                 </div> 
-        <?php } ?>
+            @endforeach
 
     </div>
 @endsection
