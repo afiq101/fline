@@ -57,16 +57,13 @@
             display: block;
             width: 60px;
             height: 60px;
-            text-align: center;
             background: black;
             color: #f6993f;
-            line-height: 50px;
             position: absolute;
             border-radius: 50% 50%;
             bottom: 0px;
             right: 0px;
             border: 5px solid #f6993f;
-            /* opacity: 0.3; */
             opacity: 1;
             transition: all 0.4s;
         }
@@ -80,13 +77,14 @@
         .floatingButton:focus,
         .floatingButton:active {
             opacity: 1;
-            color: #fff;
+            color: #f6993f;
         }
 
 
         .floatingButton .fa {
             transform: rotate(0deg);
             transition: all 0.4s;
+            margin: 15px 18px;
         }
 
         .floatingButton.open .fa {
@@ -95,9 +93,8 @@
 
         .floatingMenu {
             position: absolute;
-            bottom: 70px;
+            bottom: 61px;
             right: 0px;
-            /* width: 200px; */
             display: none;
         }
 
@@ -119,9 +116,9 @@
             white-space: nowrap;
             transition: all 0.4s;
             /* -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22);
-                box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
-            -webkit-box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
-            box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
+                                                                    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
+            /* -webkit-box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
+                                                            box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5); */
         }
 
         .floatingMenu li a:hover {
@@ -129,120 +126,144 @@
             text-decoration: none;
         }
 
-        .dark-bg{
-            max-width: 488px; width: 100%;background: linear-gradient(0deg, rgba(31, 26, 29, 0.3), rgba(31, 26, 29, 0.3))
+        .dark-bg {
+            max-width: 488px;
+            width: 100%;
+            background: linear-gradient(0deg, rgba(31, 26, 29, 0.3), rgba(31, 26, 29, 0.3))
+        }
+
+        .banner {
+            height: 233px;
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        .profile {
+            position: relative;
         }
 
     </style>
 @endsection
 
 @section('content')
-    <div class="container-fluid rounded p-3" @isset(auth()->user()->userimage) style="background-image: url({{ asset('assets/images/media/img1.jpg')}})" @else style="background-image: url({{ asset('assets/images/media/img2.jpg')}})" @endisset>
-        <div class="container dark-bg">
-            <div class="d-flex flex-column">
-                <div class="contain hovereffect d-flex justify-content-center p-3">
-                    @isset(auth()->user()->userimage)
-                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
-                    @else
-                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/default-photo.png')}}" alt="">
-                    @endisset
+    {{-- <div class="banner" @isset(auth()->user()->userimage) style="background-image:
+        url({{ asset('assets/images/media/img1.jpg') }})" @else style="background-image:
+        url({{ asset('assets/images/media/img2.jpg') }})" @endisset>
+
+    </div> --}}
+    <div class="container dark-bg profile">
+        <div class="banner" @isset(auth()->user()->userimage) style="background-image:
+            url({{ asset('assets/images/media/img1.jpg') }})" @else style="background-image:
+            url({{ asset('assets/images/media/img2.jpg') }})" @endisset>
+
+        </div>
+        <div class="d-flex flex-column">
+            <div class="contain hovereffect d-flex justify-content-center p-3" style="cursor: unset;">
+                @isset(auth()->user()->userimage)
+                    <img style="width:200px; height:200px; border-radius:50%"
+                        src="{{ asset('assets/images/profile/' . auth()->user()->userimage) }}" alt="">
+                @else
+                    <img style="width:200px; height:200px; border-radius:50%"
+                        src="{{ asset('assets/images/profile/default-photo.png') }}" alt="">
+                @endisset
+            </div>
+            <div class="p-3 text-center row justify-content-center">
+                <div class="col-12">
+                    <h3>{{ auth()->user()->name }}</h3>
                 </div>
-                <div class="p-3 text-center row justify-content-center">
-                    <div class="col-12">
-                        <h3>{{ auth()->user()->name }}</h3>
+                <div class="col-12 text-center row p-3 justify-content-center">
+                    <div class="col-4 row">
+                        <div class="col-12">
+                            <h4>Like</h4>
+                        </div>
+                        <div class="col-12">
+                            <h4>{{ $medias->count() }}</h4>
+                        </div>
                     </div>
-                    <div class="col-12 text-center row p-3 justify-content-center">
-                        <div class="col-4 row" >
-                            <div class="col-12">
-                                <h4>Like</h4>
-                            </div>
-                            <div class="col-12">
-                                <h4>{{ $medias->count() }}</h4>
-                            </div>
+                    <div class="col-4 row">
+                        <div class="col-12">
+                            <h4>Post</h4>
                         </div>
-                        <div class="col-4 row">
-                            <div class="col-12">
-                                <h4>Post</h4>
-                            </div>
-                            <div class="col-12">
-                                <h4>{{ $totalPost }}</h4>
-                            </div>
+                        <div class="col-12">
+                            <h4>{{ $totalPost }}</h4>
                         </div>
-                        <div class="col-4 row">
-                            <div class="col-12">
-                                <h4>Star</h4>
-                            </div>
-                            <div class="col-12">
-                                <h4>5</h4>
-                            </div>
+                    </div>
+                    <div class="col-4 row">
+                        <div class="col-12">
+                            <h4>Star</h4>
+                        </div>
+                        <div class="col-12">
+                            <h4>5</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
     <div class="grid masonry">
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
 
         @foreach ($medias as $item)
-        <div class="grid-item">
-            <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
-                @isset($item->image)
-                    <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
-                @else
-                    <video autoplay muted loop>
-                        <source src="{{ asset($item->full_path) }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                @endisset
-                <div class="fav">
-                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
-                        id="starIconTop_{{ $item->media_id }}"></ion-icon>
-                </div>
-                <div class="overlay">
-                    <h2>
-                        <span>{{ $item->title }}</span>
-                        <div class="react">
-                            <ion-icon name="heart"></ion-icon>
-                            <span id="likeCount_{{ $item->media_id }}">{{ $item->like_count }}</span>
-                        </div>
-                    </h2>
-                    <div class="icon">
-                        <a href="#">
-                            <ion-icon name="cloud-download-outline"></ion-icon>
-                        </a>
-                        <a href="#" onclick="onLikeMedia({{ $item->media_id }})">
-                        <ion-icon @if ($item->user_like) name="heart" @else
-                                    name="heart-outline" @endif
-                                id="likeIcon_{{ $item->media_id }}">
-                            </ion-icon>
-                        </a>
-                        <a href="#" onclick="onStarMedia({{ $item->media_id }})">
-                        <ion-icon @if ($item->user_star) name="star" @else
-                                    name="star-outline" @endif
-                                id="starIcon_{{ $item->media_id }}">
-                            </ion-icon>
-                        </a>
-                        {{-- <a href="#" >
-                        <ion-icon name="bookmark-outline"></ion-icon>
-                    </a> --}}
-                    </div>
+            <div class="grid-item" onclick="getMedia(event,{{ $item->id }})">
+                <div class="contain hovereffect">
                     @isset($item->image)
-                        <div class="dimension">
-                            {{ $item->image->width }} * {{ $item->image->height }}
-                        </div>
+                        <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
+                    @else
+                        <video autoplay muted loop>
+                            <source src="{{ asset($item->full_path) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     @endisset
-
+                    <div class="fav">
+                        <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
+                            id="starIconTop_{{ $item->id }}"></ion-icon>
+                    </div>
+                    <div class="overlay">
+                        <h2>
+                            <span>{{ $item->title }}</span>
+                            <div class="react">
+                                <ion-icon name="heart"></ion-icon>
+                                <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
+                            </div>
+                        </h2>
+                        <div class="icon">
+                            <a href="#" onclick="downloadMedia(event,'{{ $item->path }}')">
+                                <ion-icon name="cloud-download-outline"></ion-icon>
+                            </a>
+                            <a href="#" onclick="onLikeMedia(event,'{{ $item->id }}')">
+                            <ion-icon @if ($item->user_like) name="heart" @else
+                                                                                                                                                                                                                                                                                    name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
+                                </ion-icon>
+                            </a>
+                            <a href="#" onclick="onStarMedia(event,'{{ $item->id }}')">
+                            <ion-icon @if ($item->user_star) name="star" @else
+                                                                                                                                                                                                                                                                                    name="star-outline" @endif id="starIcon_{{ $item->id }}">
+                                </ion-icon>
+                            </a>
+                            {{-- <a href="#" >
+                                <ion-icon name="bookmark-outline"></ion-icon>
+                            </a> --}}
+                        </div>
+                        @isset($item->image)
+                            <div class="dimension">
+                                {{ $item->image->width }} * {{ $item->image->height }}
+                            </div>
+                        @endisset
+                        <div id="noti" hidden>
+                            {{ $item->userComment }}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
     </div>
 
-    <!-- Modal -->
+    <!-- Dynamic Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -253,7 +274,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h3 id="title-modal" class="position-absolute" style="top:10px;left:10px">
-                                Kaneki Ken
+
                             </h3>
                         </div>
                         <a id="link-modal" target="_blank">
@@ -263,12 +284,20 @@
                             <source id="videosrc-modal" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <div class="comment">
+                            <a href="">
+                                <ion-icon name="chatbubbles-outline"></ion-icon>
+                                <div id="commentnoti" class="noti">
+                                    3
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div id="accordionModal" class="accordion shadow">
                                 <!-- Accordion item 1 -->
-                                <div class="card" style="border:0px">
+                                <div class="card" style="border:0px;border-radius:0px">
                                     <div id="headingOne" class="card-header bg-white shadow-sm border-0">
                                         <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
                                                 data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
@@ -282,53 +311,31 @@
                                                 <tr>
                                                     <td style="width:100px">Description</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>test/img</td>
+                                                    <td id="m-desc"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Extension</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>.jpg</td>
+                                                    <td id="m-ext"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Path</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>fline.test/images/001.jpg</td>
+                                                    <td id="m-path"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Upload Date</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>29/02/2021</td>
+                                                    <td id="m-date"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Resolution</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>1920 x 1080</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:100px">Duration</td>
-                                                    <td style="width:30px">:</td>
-                                                    <td>2.30 min</td>
+                                                    <td id="m-dimension"></td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
-                                    {{-- <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                                        <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
-                                                data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
-                                                class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment</a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionModal"
-                                        class="collapse">
-                                        <div class="row p-3">
-                                            <div class="col-3">
-                                                <img class="dp" src="{{ asset('assets/images/profile/user001.jpg') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="col-5"></div>
-                                            <div class="col-4"></div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -338,36 +345,43 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editprofileModal" tabindex="-1" role="dialog" aria-labelledby="editprofileModal" aria-hidden="true">
+    <div class="modal fade" id="editprofileModal" tabindex="-1" role="dialog" aria-labelledby="editprofileModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Profile</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
-                  </div>
+                </div>
                 <div class="modal-body p-3">
                     <div class="row justify-content-center">
-                        
+
                         <div class="col-md-12">
                             <form method="POST" action="/updateprofile" enctype="multipart/form-data">
                                 @csrf
                                 {{ method_field('PUT') }}
                                 <div class="contain hovereffect d-flex justify-content-center p-5">
                                     @isset(auth()->user()->userimage)
-                                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
+                                        <img style="width:200px; height:200px; border-radius:50%"
+                                            src="{{ asset('assets/images/profile/' . auth()->user()->userimage) }}" alt="">
                                     @else
-                                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/default-photo.png')}}" alt="">
+                                        <img style="width:200px; height:200px; border-radius:50%"
+                                            src="{{ asset('assets/images/profile/default-photo.png') }}" alt="">
                                     @endisset
-                                    <input type="file" name="userimage" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" />
+                                    <input type="file" name="userimage"
+                                        style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" />
                                 </div>
                                 <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-        
+                                    <label for="name"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-        
+                                        <input id="name" type="text"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            value="{{ old('name') }}" required autocomplete="name" autofocus>
+
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -375,13 +389,16 @@
                                         @enderror
                                     </div>
                                 </div>
-        
+
                                 <div class="form-group row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-        
+                                    <label for="email"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-        
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email">
+
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -389,7 +406,7 @@
                                         @enderror
                                     </div>
                                 </div>
-        
+
                                 {{-- <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
         
@@ -411,7 +428,7 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                 </div> --}}
-        
+
                                 <div class="form-group row mb-0 p-2">
                                     <div class="col-md-12" style="width: 100%">
                                         <button type="submit" class="btn btn-primary btn-block">
@@ -427,21 +444,21 @@
         </div>
     </div>
 
-<div class="floatingButtonWrap">
-    <div class="floatingButtonInner">
-        <a href="#" class="floatingButton">
-            <i class="fa fa-plus icon-default"></i>
-        </a>
-        <ul class="floatingMenu">
-            <li>
-                <a href="#">Your Media</a>
-            </li>
-            <li>
-                <a href="" data-toggle="modal" data-target="#editprofileModal">Update Profile</a>
-            </li>
-        </ul>
+    <div class="floatingButtonWrap">
+        <div class="floatingButtonInner">
+            <a href="#" class="floatingButton">
+                <i class="fa fa-plus icon-default"></i>
+            </a>
+            <ul class="floatingMenu">
+                <li>
+                    <a href="#">Your Media</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#editprofileModal">Update Profile</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 @endsection
 
 @section('script-bottom')
@@ -498,13 +515,18 @@
             $grid.masonry('layout');
         });
 
-        $(document).on("click", ".grid-item", function() {
+        async function getMedia(event, id) {
             $("#img-modal").hide();
             $("#video-modal").hide();
-            var imagePath = $(this).children().find("img").attr("src");
-            var title = $(this).children().find("span").first().text();
+            var res = await axios.post("/api/getMedia", {
+                mid: id
+            });
+
+            var data = res.data.success[0];
+            var imagePath = $(event.path[2]).children().find("img").attr("src");
+            var noti = $(event.path[2]).children().find("#noti").text();
             if (typeof imagePath === 'undefined') {
-                var videoPath = $(this).children().find("video").find('source').attr("src");
+                var videoPath = $(event.path[2]).children().find("video").find('source').attr("src");
                 var video = $("#video-modal");
                 video.get(0).pause();
                 $("#videosrc-modal").attr("src", videoPath);
@@ -517,12 +539,22 @@
                 $("#img-modal").show();
             }
 
-            $("#title-modal").text(title)
-        });
+            $("#title-modal").text(data.mediattl)
+            $("#m-desc").text(data.mediadesc)
+            $("#m-ext").text(data.mediaex)
+            $("#m-path").text('/assets/images/media/' + data.mediapath)
+            $("#m-date").text(data.mediadateup)
+            $("#m-dimension").text(data.imgwidth + ' x ' + data.imgheight)
+            $("#commentnoti").text(noti)
+            $(".comment a").attr("href", "/comment/" + id)
+            $("#imageModal").modal('show');
+        }
 
         // Like Media Script
-        async function onLikeMedia(id) {
-            var res = await axios.post('{{ route('like.store') }}', {
+        async function onLikeMedia(e, id) {
+            e.preventDefault();
+            e.stopPropagation();
+            var res = await axios.post("{{ route('like.store') }}", {
                 media_id: id
             });
 
@@ -535,11 +567,15 @@
             }
 
             $('#likeCount_' + data.media_id).html(data.like_count);
+            // $('#imageModal').modal('hide');
+
         }
 
         // Star Media Script
-        async function onStarMedia(id) {
-            var res = await axios.post('{{ route('star.store') }}', {
+        async function onStarMedia(e, id) {
+            e.preventDefault();
+            e.stopPropagation();
+            var res = await axios.post("{{ route('star.store') }}", {
                 media_id: id
             });
 
@@ -553,6 +589,18 @@
                 $('#starIcon_' + data.media_id).attr('name', 'star-outline');
                 $('#starIconTop_' + data.media_id).hide();
             }
+        }
+
+        function downloadMedia(e, path) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var link = document.createElement('a');
+            link.href = "/assets/images/media/" + path;
+            link.download = path;
+            link.click();
+            link.remove();
+
         }
     </script>
 @endsection

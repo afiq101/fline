@@ -42,7 +42,41 @@ nav {
 }
 
 .card {
-    background-color: #121212;
-    border:1px solid #1F1F1F;
+    background-color: #1f1f1f;
+    border: 1px solid #1f1f1f;
+    border-radius: 16px;
 }
 
+::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+::-webkit-scrollbar-track {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #313131;
+    border-radius: 10px;
+}
+.nav-tabs {
+    border-bottom: 1px solid #1f1f1f;
+}
+.nav-tabs .nav-link {
+    margin-bottom: -1px;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #f6993f;
+    border-color: #1f1f1f;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+    border-color: #1f1f1f;
+}

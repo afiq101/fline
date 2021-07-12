@@ -28,50 +28,15 @@
             vertical-align: middle;
         }
 
-        .dp {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        ion-icon[name="heart"] {
+            color: #ff6156;
         }
 
-        .comment {
-            position: relative;
-            width: 45px;
-            height: 45px;
-            bottom: 50px;
-            left: 8px;
-            background-color: rgba(0, 0, 0, 0.4);
-            border-radius: 50%;
+        ion-icon[name="star"] {
+            color: #FFAA48;
         }
 
-        .comment a {
-            color: inherit;
-            text-decoration: none;
-        }
 
-        .comment a:hover {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .comment ion-icon {
-            font-size: 30px;
-            display: block;
-            margin: auto;
-            padding-top: 6px;
-        }
-
-        .comment .noti {
-            position: relative;
-            bottom: 43px;
-            left: 30px;
-            width: 21px;
-            height: 21px;
-            background-color: #FA5F01;
-            border-radius: 50%;
-            text-align: center;
-
-        }
 
     </style>
 @endsection
@@ -109,8 +74,8 @@
             <div class="gutter-sizer"></div>
 
             @foreach ($images as $item)
-                <div class="grid-item">
-                    <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
+                <div class="grid-item" onclick="getMedia(event,{{ $item->id }})">
+                    <div class="contain hovereffect">
                         @isset($item->image)
                             <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
                         @else
@@ -132,17 +97,17 @@
                                 </div>
                             </h2>
                             <div class="icon">
-                                <a href="#">
+                                <a href="#" onclick="downloadMedia(event,'{{ $item->path }}')">
                                     <ion-icon name="cloud-download-outline"></ion-icon>
                                 </a>
-                                <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
+                                <a href="#" onclick="onLikeMedia(event,'{{ $item->id }}')">
                                 <ion-icon @if ($item->user_like) name="heart" @else
-                                                                                                                                    name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
+                                                                                                                                                                                                                                            name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
-                                <a href="#" onclick="onStarMedia('{{ $item->id }}')">
+                                <a href="#" onclick="onStarMedia(event,'{{ $item->id }}')">
                                 <ion-icon @if ($item->user_star) name="star" @else
-                                                                                                                                    name="star-outline" @endif id="starIcon_{{ $item->id }}">
+                                                                                                                                                                                                                                            name="star-outline" @endif id="starIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
                                 {{-- <a href="#" >
@@ -154,16 +119,15 @@
                                     {{ $item->image->width }} * {{ $item->image->height }}
                                 </div>
                             @endisset
-
+                            <div id="noti" hidden>
+                                {{ $item->userComment }}
+                            </div>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-
-
-
 
     <!-- Dynamic Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
@@ -176,7 +140,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h3 id="title-modal" class="position-absolute" style="top:10px;left:10px">
-                                Kaneki Ken
+
                             </h3>
                         </div>
                         <a id="link-modal" target="_blank">
@@ -187,9 +151,9 @@
                             Your browser does not support the video tag.
                         </video>
                         <div class="comment">
-                            <a href="/comment/1">
+                            <a href="">
                                 <ion-icon name="chatbubbles-outline"></ion-icon>
-                                <div id="commendnoti" class="noti">
+                                <div id="commentnoti" class="noti">
                                     3
                                 </div>
                             </a>
@@ -199,7 +163,7 @@
                         <div class="col-md-12">
                             <div id="accordionModal" class="accordion shadow">
                                 <!-- Accordion item 1 -->
-                                <div class="card" style="border:0px">
+                                <div class="card" style="border:0px;border-radius:0px">
                                     <div id="headingOne" class="card-header bg-white shadow-sm border-0">
                                         <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
                                                 data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
@@ -213,32 +177,27 @@
                                                 <tr>
                                                     <td style="width:100px">Description</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>test/img</td>
+                                                    <td id="m-desc"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Extension</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>.jpg</td>
+                                                    <td id="m-ext"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Path</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>fline.test/images/001.jpg</td>
+                                                    <td id="m-path"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Upload Date</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>29/02/2021</td>
+                                                    <td id="m-date"></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width:100px">Resolution</td>
                                                     <td style="width:30px">:</td>
-                                                    <td>1920 x 1080</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:100px">Duration</td>
-                                                    <td style="width:30px">:</td>
-                                                    <td>2.30 min</td>
+                                                    <td id="m-dimension"></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -275,13 +234,18 @@
             $grid.masonry('layout');
         });
 
-        $(document).on("click", ".grid-item", function() {
+        async function getMedia(event, id) {
             $("#img-modal").hide();
             $("#video-modal").hide();
-            var imagePath = $(this).children().find("img").attr("src");
-            var title = $(this).children().find("span").first().text();
+            var res = await axios.post("/api/getMedia", {
+                mid: id
+            });
+
+            var data = res.data.success[0];
+            var imagePath = $(event.path[2]).children().find("img").attr("src");
+            var noti = $(event.path[2]).children().find("#noti").text();
             if (typeof imagePath === 'undefined') {
-                var videoPath = $(this).children().find("video").find('source').attr("src");
+                var videoPath = $(event.path[2]).children().find("video").find('source').attr("src");
                 var video = $("#video-modal");
                 video.get(0).pause();
                 $("#videosrc-modal").attr("src", videoPath);
@@ -294,8 +258,16 @@
                 $("#img-modal").show();
             }
 
-            $("#title-modal").text(title)
-        });
+            $("#title-modal").text(data.mediattl)
+            $("#m-desc").text(data.mediadesc)
+            $("#m-ext").text(data.mediaex)
+            $("#m-path").text('/assets/images/media/' + data.mediapath)
+            $("#m-date").text(data.mediadateup)
+            $("#m-dimension").text(data.imgwidth + ' x ' + data.imgheight)
+            $("#commentnoti").text(noti)
+            $(".comment a").attr("href", "/comment/" + id)
+            $("#imageModal").modal('show');
+        }
 
         // Like Media Script
         async function onLikeMedia(e, id) {
@@ -319,7 +291,9 @@
         }
 
         // Star Media Script
-        async function onStarMedia(id) {
+        async function onStarMedia(e, id) {
+            e.preventDefault();
+            e.stopPropagation();
             var res = await axios.post("{{ route('star.store') }}", {
                 media_id: id
             });
@@ -334,6 +308,18 @@
                 $('#starIcon_' + data.media_id).attr('name', 'star-outline');
                 $('#starIconTop_' + data.media_id).hide();
             }
+        }
+
+        function downloadMedia(e, path) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var link = document.createElement('a');
+            link.href = "/assets/images/media/" + path;
+            link.download = path;
+            link.click();
+            link.remove();
+
         }
     </script>
 @endsection

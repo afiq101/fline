@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-Route::get('/',  function () {
-    return redirect(Route('home.index'));
-});
+// Route::get('/',  function () {
+//     return redirect(Route('home.index'));
+// });
 
+Route::get('/', 'HomeController@index');
 Route::resource('home', 'HomeController');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -44,4 +45,7 @@ Route::post('/Media/upload', 'Media\MediaController@update');
 
 Route::resource('like', 'UserLikeController');
 Route::resource('star', 'UserStarController');
+
+Route::post('/api/getMedia', 'HomeController@getMedia');
+
 
