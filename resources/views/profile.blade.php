@@ -119,7 +119,7 @@
             white-space: nowrap;
             transition: all 0.4s;
             /* -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22);
-            box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
+                box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22); */
             -webkit-box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
             box-shadow: 1px 3px 5px rgba(211, 224, 255, 0.5);
         }
@@ -129,35 +129,43 @@
             text-decoration: none;
         }
 
+        .dark-bg{
+            max-width: 488px; width: 100%;background: linear-gradient(0deg, rgba(31, 26, 29, 0.3), rgba(31, 26, 29, 0.3))
+        }
+
     </style>
 @endsection
 
 @section('content')
-    <div class="container-fluid rounded p-3" style="background-color: #1f1f1f">
-        <div class="container" style="max-width: 488px; width: 100%;">
+    <div class="container-fluid rounded p-3" @isset(auth()->user()->userimage) style="background-image: url({{ asset('assets/images/media/img1.jpg')}})" @else style="background-image: url({{ asset('assets/images/media/img2.jpg')}})" @endisset>
+        <div class="container dark-bg">
             <div class="d-flex flex-column">
                 <div class="contain hovereffect d-flex justify-content-center p-3">
+                    @isset(auth()->user()->userimage)
                     <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
+                    @else
+                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/default-photo.png')}}" alt="">
+                    @endisset
                 </div>
                 <div class="p-3 text-center row justify-content-center">
                     <div class="col-12">
-                        <h3>{{auth()->user()->name}}</h3>
+                        <h3>{{ auth()->user()->name }}</h3>
                     </div>
-                    <div class="col-12 text-center row p-3 justify-content-center" style="color: #636b6f">
+                    <div class="col-12 text-center row p-3 justify-content-center">
                         <div class="col-4 row" >
                             <div class="col-12">
                                 <h4>Like</h4>
                             </div>
                             <div class="col-12">
-                                <h4>{{$medias->count()}}</h4>
+                                <h4>{{ $medias->count() }}</h4>
                             </div>
                         </div>
-                        <div class="col-4 row" >
+                        <div class="col-4 row">
                             <div class="col-12">
                                 <h4>Post</h4>
                             </div>
                             <div class="col-12">
-                                <h4>{{$totalPost}}</h4>
+                                <h4>{{ $totalPost }}</h4>
                             </div>
                         </div>
                         <div class="col-4 row">
@@ -172,15 +180,14 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="grid masonry">
         <!-- .grid-sizer empty element, only used for element sizing -->
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
 
-        @foreach($medias as $item)
-        
+        @foreach ($medias as $item)
         <div class="grid-item">
             <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
                 @isset($item->image)
@@ -192,7 +199,8 @@
                     </video>
                 @endisset
                 <div class="fav">
-                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->media_id }}"></ion-icon>
+                    <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
+                        id="starIconTop_{{ $item->media_id }}"></ion-icon>
                 </div>
                 <div class="overlay">
                     <h2>
@@ -219,8 +227,8 @@
                             </ion-icon>
                         </a>
                         {{-- <a href="#" >
-                            <ion-icon name="bookmark-outline"></ion-icon>
-                        </a> --}}
+                        <ion-icon name="bookmark-outline"></ion-icon>
+                    </a> --}}
                     </div>
                     @isset($item->image)
                         <div class="dimension">
@@ -231,9 +239,8 @@
                 </div>
             </div>
         </div>
-    
     @endforeach
-</div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
@@ -331,6 +338,95 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editprofileModal" tabindex="-1" role="dialog" aria-labelledby="editprofileModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <div class="modal-body p-3">
+                    <div class="row justify-content-center">
+                        
+                        <div class="col-md-12">
+                            <form method="POST" action="/updateprofile" enctype="multipart/form-data">
+                                @csrf
+                                {{ method_field('PUT') }}
+                                <div class="contain hovereffect d-flex justify-content-center p-5">
+                                    @isset(auth()->user()->userimage)
+                                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/'.auth()->user()->userimage) }}" alt="">
+                                    @else
+                                    <img style="width:200px; height:200px; border-radius:50%" src="{{ asset('assets/images/profile/default-photo.png')}}" alt="">
+                                    @endisset
+                                    <input type="file" name="userimage" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" />
+                                </div>
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+        
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                {{-- <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+        
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    </div>
+                                </div> --}}
+        
+                                <div class="form-group row mb-0 p-2">
+                                    <div class="col-md-12" style="width: 100%">
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="floatingButtonWrap">
     <div class="floatingButtonInner">
         <a href="#" class="floatingButton">
@@ -341,7 +437,7 @@
                 <a href="#">Your Media</a>
             </li>
             <li>
-                <a href="#">Edit Profile</a>
+                <a href="" data-toggle="modal" data-target="#editprofileModal">Update Profile</a>
             </li>
         </ul>
     </div>
@@ -350,45 +446,39 @@
 
 @section('script-bottom')
     <script>
-         $(document).ready(function(){
+        $(document).ready(function() {
             $('.floatingButton').on('click',
-            function(e){
-                e.preventDefault();
-                $(this).toggleClass('open');
-                if($(this).children('.fa').hasClass('fa-plus'))
-                {
-                    $(this).children('.fa').removeClass('fa-plus');
-                    $(this).children('.fa').addClass('fa-close');
-                } 
-                else if ($(this).children('.fa').hasClass('fa-close')) 
-                {
-                    $(this).children('.fa').removeClass('fa-close');
-                    $(this).children('.fa').addClass('fa-plus');
+                function(e) {
+                    e.preventDefault();
+                    $(this).toggleClass('open');
+                    if ($(this).children('.fa').hasClass('fa-plus')) {
+                        $(this).children('.fa').removeClass('fa-plus');
+                        $(this).children('.fa').addClass('fa-close');
+                    } else if ($(this).children('.fa').hasClass('fa-close')) {
+                        $(this).children('.fa').removeClass('fa-close');
+                        $(this).children('.fa').addClass('fa-plus');
+                    }
+                    $('.floatingMenu').stop().slideToggle();
                 }
-                $('.floatingMenu').stop().slideToggle();
-            }
-        );
-        $(this).on('click', function(e) {
-            var container = $(".floatingButton");
+            );
+            $(this).on('click', function(e) {
+                var container = $(".floatingButton");
 
-            // if the target of the click isn't the container nor a descendant of the container
-            if (!container.is(e.target) && $('.floatingButtonWrap').has(e.target).length === 0) 
-            {
-                if(container.hasClass('open'))
-                {
-                    container.removeClass('open');
+                // if the target of the click isn't the container nor a descendant of the container
+                if (!container.is(e.target) && $('.floatingButtonWrap').has(e.target).length === 0) {
+                    if (container.hasClass('open')) {
+                        container.removeClass('open');
+                    }
+                    if (container.children('.fa').hasClass('fa-close')) {
+                        container.children('.fa').removeClass('fa-close');
+                        container.children('.fa').addClass('fa-plus');
+                    }
+                    $('.floatingMenu').hide();
                 }
-                if (container.children('.fa').hasClass('fa-close')) 
-                {
-                    container.children('.fa').removeClass('fa-close');
-                    container.children('.fa').addClass('fa-plus');
-                }
-                $('.floatingMenu').hide();
-            }
+            });
         });
-    });
-    
-       const video = document.querySelector('video');
+
+        const video = document.querySelector('video');
 
         // init Masonry
         var $grid = $('.grid').masonry({

@@ -14,6 +14,7 @@ class CommentController extends Controller
     {
         $comments = UserComment::where('media_id', $mid)->join('users', 'users.id', '=', 'user_comments.user_id')
             ->select('users.*','user_comments.*','user_comments.created_at as commented_at')
+            ->orderBy('user_comments.created_at', 'desc')
             ->get();
 
         $owner = Media::where('medias.id',$mid)->join('users', 'users.id', '=', 'medias.userid')

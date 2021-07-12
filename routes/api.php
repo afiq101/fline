@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get("/getMetadata/{id}", "Media\MediaController@getMetadata");
 Route::group(['middleware' => 'auth'], function() {
     Route::post('/post-comment/{mid}', 'CommentController@addComment');
 });

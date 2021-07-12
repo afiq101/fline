@@ -34,73 +34,136 @@
             border-radius: 50%;
         }
 
+        .comment {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            bottom: 50px;
+            left: 8px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+        }
+
+        .comment a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .comment a:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .comment ion-icon {
+            font-size: 30px;
+            display: block;
+            margin: auto;
+            padding-top: 6px;
+        }
+
+        .comment .noti {
+            position: relative;
+            bottom: 43px;
+            left: 30px;
+            width: 21px;
+            height: 21px;
+            background-color: #FA5F01;
+            border-radius: 50%;
+            text-align: center;
+
+        }
+
     </style>
 @endsection
 
 @section('content')
-    {{ $images->first() }}
-
     {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
     </button> --}}
-    <div class="grid masonry">
-        <!-- .grid-sizer empty element, only used for element sizing -->
-        <div class="grid-sizer"></div>
-        <div class="gutter-sizer"></div>
-        @foreach ($images as $item)
+    <div class="container-fluid">
+        <form method="POST" action="{{ route('home.store') }}">
+            @csrf
+            <div class="d-flex flex-row">
+                <input type="text" name="search" class="form-control" placeholder="Search for FLINEs">
+                <input type="submit" class="btn btn-primary ml-1" value="Search">
+            </div>
+        </form>
 
-            <div class="grid-item">
-                <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
-                    @isset($item->image)
-                        <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
-                    @else
-                        <video autoplay muted loop>
-                            <source src="{{ asset($item->full_path) }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    @endisset
-                    <div class="fav">
-                        <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif id="starIconTop_{{ $item->id }}"></ion-icon>
-                    </div>
-                    <div class="overlay">
-                        <h2>
-                            <span>{{ $item->title }}</span>
-                            <div class="react">
-                                <ion-icon name="heart"></ion-icon>
-                                <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
-                            </div>
-                        </h2>
-                        <div class="icon">
-                            <a href="#">
-                                <ion-icon name="cloud-download-outline"></ion-icon>
-                            </a>
-                            <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
-                            <ion-icon @if ($item->user_like) name="heart" @else
-                                        name="heart-outline" @endif
-                                    id="likeIcon_{{ $item->id }}">
-                                </ion-icon>
-                            </a>
-                            <a href="#" onclick="onStarMedia('{{ $item->id }}')">
-                            <ion-icon @if ($item->user_star) name="star" @else
-                                        name="star-outline" @endif
-                                    id="starIcon_{{ $item->id }}">
-                                </ion-icon>
-                            </a>
-                            {{-- <a href="#" >
-                                <ion-icon name="bookmark-outline"></ion-icon>
-                            </a> --}}
-                        </div>
+        @isset($search)
+            <div class="my-3">
+                <p class="font-weight-normal">Showing results for query <span
+                        class="font-weight-bolder">{{ $search }}</span>
+                </p>
+            </div>
+        @endisset
+
+        @if ($images->count() == 0)
+            <div class="my-5">
+                <p class="font-weight-bolder text-center text-muted">No FLINEs matches your query</p>
+            </div>
+        @endif
+
+        <div class="grid masonry">
+            <!-- .grid-sizer empty element, only used for element sizing -->
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+
+            @foreach ($images as $item)
+                <div class="grid-item">
+                    <div class="contain hovereffect" data-toggle="modal" data-target="#imageModal">
                         @isset($item->image)
-                            <div class="dimension">
-                                {{ $item->image->width }} * {{ $item->image->height }}
-                            </div>
+                            <img class="img-responsive" src="{{ asset($item->full_path) }}" alt="">
+                        @else
+                            <video autoplay muted loop>
+                                <source src="{{ asset($item->full_path) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         @endisset
+                        <div class="fav">
+                            <ion-icon name="star" @if (!$item->user_star) style="display:none;" @endif
+                                id="starIconTop_{{ $item->id }}"></ion-icon>
+                        </div>
+                        <div class="overlay">
+                            <h2>
+                                <span>{{ $item->title }}</span>
+                                <div class="react">
+                                    <ion-icon name="heart"></ion-icon>
+                                    <span id="likeCount_{{ $item->id }}">{{ $item->like_count }}</span>
+                                </div>
+                            </h2>
+                            <div class="icon">
+                                <a href="#">
+                                    <ion-icon name="cloud-download-outline"></ion-icon>
+                                </a>
+                                <a href="#" onclick="onLikeMedia('{{ $item->id }}')">
+                                <ion-icon @if ($item->user_like) name="heart" @else
+                                                                                                                                    name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
+                                    </ion-icon>
+                                </a>
+                                <a href="#" onclick="onStarMedia('{{ $item->id }}')">
+                                <ion-icon @if ($item->user_star) name="star" @else
+                                                                                                                                    name="star-outline" @endif id="starIcon_{{ $item->id }}">
+                                    </ion-icon>
+                                </a>
+                                {{-- <a href="#" >
+                                    <ion-icon name="bookmark-outline"></ion-icon>
+                                </a> --}}
+                            </div>
+                            @isset($item->image)
+                                <div class="dimension">
+                                    {{ $item->image->width }} * {{ $item->image->height }}
+                                </div>
+                            @endisset
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
+
+
+
 
     <!-- Dynamic Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
@@ -123,6 +186,14 @@
                             <source id="videosrc-modal" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <div class="comment">
+                            <a href="/comment/1">
+                                <ion-icon name="chatbubbles-outline"></ion-icon>
+                                <div id="commendnoti" class="noti">
+                                    3
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -172,23 +243,6 @@
                                             </table>
                                         </div>
                                     </div>
-                                    {{-- <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                                        <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
-                                                data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
-                                                class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment</a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionModal"
-                                        class="collapse">
-                                        <div class="row p-3">
-                                            <div class="col-3">
-                                                <img class="dp" src="{{ asset('assets/images/profile/user001.jpg') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="col-5"></div>
-                                            <div class="col-4"></div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -248,7 +302,9 @@
         });
 
         // Like Media Script
-        async function onLikeMedia(id) {
+        async function onLikeMedia(e, id) {
+            e.preventDefault();
+            e.stopPropagation();
             var res = await axios.post("{{ route('like.store') }}", {
                 media_id: id
             });
@@ -262,6 +318,8 @@
             }
 
             $('#likeCount_' + data.media_id).html(data.like_count);
+            // $('#imageModal').modal('hide');
+
         }
 
         // Star Media Script
