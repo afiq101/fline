@@ -151,7 +151,11 @@
                             Your browser does not support the video tag.
                         </video>
                         <div class="comment">
-                            <a href="">
+                            @guest
+                            <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+                            @else
+                            <a href="profile">
+                            @endguest
                                 <ion-icon name="chatbubbles-outline"></ion-icon>
                                 <div id="commentnoti" class="noti">
                                     3

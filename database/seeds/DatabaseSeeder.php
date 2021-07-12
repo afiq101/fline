@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
             $media = Media::create([
                 'path' => $value->getFilename(),
                 'title' => $value->getFilename(),
-                'size' => $size
+                'size' => $size,
+                'userid' => 1
             ]);
 
             if (isset($width) && isset($height)) {
