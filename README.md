@@ -5,7 +5,10 @@
 
 ## About FLINE
 **FLINE** is an image and video sharing and social media application.
+This project will be useful for businessman or businesswoman for them to promote their products.
+Or maybe bloggers and photographer for them to share the idea and results.
 This Application is developed in fulfilment of Mini Project of BITP3353 DATABASE MULTIMEDIA.
+
 
 ## Developers
 - [Iqmal Rizal](https://github.com/iqmalriz)
