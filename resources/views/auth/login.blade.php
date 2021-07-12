@@ -16,8 +16,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-body "><img class="center-block" alt="Brand" width="100" src="{{ URL::asset('assets/images/logo/logo.png') }}"></div>
-                <h3 class="text-center font-weight-bold">Welcome to Fline</h3>
+                <div class="card-body "><img class="center-block" alt="Brand" width="200" src="{{ URL::asset('assets/images/logo/logo.png') }}"></div>
+                <h1 class="text-center ">Welcome to Fline</h1>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
