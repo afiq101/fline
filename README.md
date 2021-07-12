@@ -40,4 +40,10 @@ coming soon
 ## Instruction to Deploy
 1. Ensure that your server met the requirements needed to deploy Laravel 7 applications
 2. Clone this repository
-3. execute ```composer install``` command
+3. Execute ```composer install``` command
+4. Duplicate the ```.env.example``` file and rename it to ```.env```. Ensure database credentials in ```.env``` file matches your configuration
+5. Create a database named ```fline```
+6. Execute ```php artisan key:generate``` command
+7. Execute ```php artisan migrate:fresh --seed``` command
+8. Application is ready to be used
+
