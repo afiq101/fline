@@ -100,12 +100,20 @@
                                 <a href="#" onclick="downloadMedia(event,'{{ $item->path }}')">
                                     <ion-icon name="cloud-download-outline"></ion-icon>
                                 </a>
+                                @guest
+                                <a href="#" onclick="onGuestLike(event)">
+                                @else
                                 <a href="#" onclick="onLikeMedia(event,'{{ $item->id }}')">
+                                @endguest
                                 <ion-icon @if ($item->user_like) name="heart" @else
                                                                                                                                                                                                                                                 name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
+                                @guest
+                                <a href="#" onclick="onGuestLike(event)">
+                                @else
                                 <a href="#" onclick="onStarMedia(event,'{{ $item->id }}')">
+                                @endguest
                                 <ion-icon @if ($item->user_star) name="star" @else
                                                                                                                                                                                                                                                 name="star-outline" @endif id="starIcon_{{ $item->id }}">
                                     </ion-icon>
@@ -154,7 +162,7 @@
                             @guest
                             <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                             @else
-                            <a href="profile">
+                            <a href="#">
                             @endguest
                                 <ion-icon name="chatbubbles-outline"></ion-icon>
                                 <div id="commentnoti" class="noti">
@@ -240,6 +248,7 @@
 
         video.addEventListener('loadeddata', (event) => {
             $grid.masonry('layout');
+            
         });
 
         async function getMedia(event, id) {
@@ -319,6 +328,7 @@
         }
 
         function downloadMedia(e, path) {
+            console.log('download');
             e.preventDefault();
             e.stopPropagation();
 
@@ -328,6 +338,12 @@
             link.click();
             link.remove();
 
+        }
+
+        function onGuestLike(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#loginModal').modal('show');
         }
     </script>
 @endsection

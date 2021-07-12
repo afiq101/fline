@@ -211,7 +211,7 @@
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
 
-        @foreach ($medias as $item)
+        @foreach ($mediasLike as $item)
             <div class="grid-item" onclick="getMedia(event,{{ $item->id }})">
                 <div class="contain hovereffect">
                     @isset($item->image)
@@ -455,7 +455,7 @@
                 <i class="fa fa-plus icon-default"></i>
             </a>
             <ul class="floatingMenu">
-                <li>
+            <li>
                     <a href="{{ url('profile') }}">Star Media</a>
                 </li>
                 <li>

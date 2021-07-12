@@ -26,6 +26,7 @@ Route::resource('home', 'HomeController');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/comment/{mid}', 'CommentController@displayComment');
     Route::get('/profile', 'ProfileController@profile');
+    Route::get('/profilelike', 'ProfileController@profilelike');
     Route::put('/updateprofile', 'ProfileController@updateprofile');
     Route::get('/manage', 'Media\MediaController@index');
     Route::get('/manage/add', 'Media\MediaController@create');

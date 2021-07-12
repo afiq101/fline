@@ -12,10 +12,18 @@
                 <a class="nav-link" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
+                @guest
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Manage</a>
+                @else
                 <a class="nav-link" href="{{ url('manage') }}">Manage</a>
+                @endguest
             </li>
             <li class="nav-item">
+                @guest
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Profile</a>
+                @else
                 <a class="nav-link" href="{{ url('profile') }}">Profile</a>
+                @endguest
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
