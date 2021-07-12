@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="{{ url('home') }}">
         <img alt="Brand" width="100" src="{{ URL::asset('assets/images/logo/logo.png') }}">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -9,13 +9,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/manage">Manage</a>
+                <a class="nav-link" href="{{ url('manage') }}">Manage</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="{{ url('profile') }}">Profile</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -37,7 +37,7 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                 document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 

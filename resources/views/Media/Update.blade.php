@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+@if(!empty($failed))
+  <div class="alert alert-success"> {{ $failed }}</div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -66,9 +69,9 @@
         var file = $("input[type=file]").get(0).files[0];
         console.log(file.type.split('/')[0]);
         if(file.type.split('/')[0] == 'image')
-            $("#preview").append('<img id="previewImg" width="300" height="200"></img>');
+            $("#preview").append('<img id="previewImg" width="300"></img>');
         else if(file.type.split('/')[0] == 'video')
-            $("#preview").append('<video controls id="previewImg" width="300" height="200"></video>');
+            $("#preview").append('<video controls id="previewImg" width="300"></video>');
 
         if(file){
             var reader = new FileReader();
@@ -85,9 +88,9 @@
             let extension = file.split('.')[1];
             $( "#previewImg" ).remove();
             if (extension == "x-flv" || extension == "mp4" || extension == "x-mpegURL" || extension == "MP2T" || extension == "3gpp" || extension == "quicktime" || extension == "x-msvideo" || extension == "x-ms-wmv")
-                    $("#preview").append('<video controls id="previewImg" width="300" height="200"></video>');
+                    $("#preview").append('<video controls id="previewImg" width="300"></video>');
             else
-                $("#preview").append('<img id="previewImg" width="300" height="200"></img>');
+                $("#preview").append('<img id="previewImg" width="300"></img>');
             console.log(file);
             $("#previewImg").attr("src", `{{ asset('assets/images/media/${file}')}}`);
     }

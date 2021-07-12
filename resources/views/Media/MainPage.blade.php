@@ -1,122 +1,83 @@
 @extends('layouts.master')
 
 @section('css')
-    <style>
-        .contain {
-            height: 300px;
-            width: 100%;
-            border-radius: 16px;
-        }
-
-        .contain img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-
-        }
-
-        .masonry {
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        /* fluid 5 columns */
-        .grid-sizer,
-        .grid-item {
-            width: 19%;
-            margin-bottom: 20px;
-        }
-
-        .gutter-sizer {
-            width: 1%;
-        }
-
-        @media screen and (max-width: 1200px) {
-
-            .grid-sizer,
-            .grid-item {
-                width: 30%;
-                margin-bottom: 20px;
-            }
-
-            .gutter-sizer {
-                width: 5%;
-            }
-        }
-
-        @media screen and (max-width: 992px) {
-
-            .grid-sizer,
-            .grid-item {
-                width: 49%;
-                margin-bottom: 20px;
-            }
-
-            .gutter-sizer {
-                width: 2%;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .masonry {
-                width: 90%;
-            }
-
-            .grid-sizer,
-            .grid-item {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .gutter-sizer {
-                width: 0%;
-            }
-        }
-
-    </style>
-
+    <link href="{{ URL::asset('assets/css/hover2.css') }}" id="style-css" rel="stylesheet">
 @endsection
 
 @section('content')
-    <a href="/manage/add">
-        <button style="float: right;">Insert</button>
-    </a>
-    <div class="grid masonry">
-        <!-- .grid-sizer empty element, only used for element sizing -->
-        <div class="grid-sizer"></div>
-        <div class="gutter-sizer"></div>
-        @foreach ($userMedia as $key => $value)
-            <div class="grid-item">
-                <div class="contain">
-                    <?php 
-                        $extension = explode('.' , $value->path)[1];
-                        if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") { ?>
-                    <video width="300" height="200" controls src="{{ asset('assets/images/media/' . $value->path) }}"></vidoe>
-                        <?php } else { ?>
-                        <img width="300" height="200" src="{{ asset('assets/images/media/' . $value->path) }}" alt="">
-                        <?php } ?>
-                </div>
-                <a href="{{ URL::to('manage/edit/' . $value->id) }}">
-                    <button class="btn btn-success">Update</button>
-                </a>
-                <a href="{{ URL::to('manage/destroy/' . $value->id) }}">
-                    <button class="btn btn-danger">Delete</button>
-                </a>
-                <br>
-            </div>
-        @endforeach
 
+    <div class="row">
+        <div class="col-12">
+            <a href="/manage/add">
+                <button class="btn btn-primary" style="float: right;">Insert</button>
+            </a>
+        </div>
+        <div class="col-12">
+            <div class="grid masonry">
+                <!-- .grid-sizer empty element, only used for element sizing -->
+                <div class="grid-sizer"></div>
+                <div class="gutter-sizer"></div>
+                @foreach ($userMedia as $key => $value)
+                    <div class="grid-item">
+                        <div class="contain hovereffect">
+                            <?php 
+                                $extension = explode('.' , $value->path)[1];
+                                if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") { ?>
+                            <video controls autoplay>
+                                <source src="{{ asset('assets/images/media/' . $value->path) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <?php } else { ?>
+                            <img class="img-responsive" src="{{ asset('assets/images/media/' . $value->path) }}" alt="">
+                            <?php } ?>
+                            <div class="overlay">
+                                <h2>{{ $value->title }}</h2>
+                                <p class="icon-links">
+                                    <a href="{{ URL::to('manage/destroy/' . $value->id) }}">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </a>
+                                    <a href="{{ URL::to('manage/edit/' . $value->id) }}">
+                                        <ion-icon name="create"></ion-icon>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        {{-- <a href="{{ URL::to('manage/edit/' . $value->id) }}">
+                            <button class="btn btn-success">Update</button>
+                        </a>
+                        <a href="{{ URL::to('manage/destroy/' . $value->id) }}">
+                            <button class="btn btn-danger">Delete</button>
+                        </a>
+                        <br> --}}
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
     </div>
+
 @endsection
 
 @section('script-bottom')
     <script>
-        $('.grid').masonry({
+        const video = document.querySelector('video');
+
+        // init Masonry
+        var $grid = $('.grid').masonry({
             columnWidth: '.grid-sizer',
             itemSelector: '.grid-item',
             gutter: '.gutter-sizer',
-            percentPosition: true
-        })
+            isAnimated: true,
+            percentPosition: true,
+            animationOptions: {
+                duration: 700,
+                easing: 'linear',
+                queue: false
+            }
+        });
+
+        video.addEventListener('loadeddata', (event) => {
+            $grid.masonry('layout');
+        });
     </script>
 @endsection

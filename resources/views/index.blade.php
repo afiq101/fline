@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('css')
+    <link href="{{ URL::asset('assets/css/hover.css') }}" id="style-css" rel="stylesheet">
+
     <style>
         .icon ion-icon {
             color: white;
@@ -35,8 +37,6 @@
         ion-icon[name="star"] {
             color: #FFAA48;
         }
-
-
 
     </style>
 @endsection
@@ -102,12 +102,12 @@
                                 </a>
                                 <a href="#" onclick="onLikeMedia(event,'{{ $item->id }}')">
                                 <ion-icon @if ($item->user_like) name="heart" @else
-                                                                                                                                                                                                                                            name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
+                                                                                                                                                                                                                                                name="heart-outline" @endif id="likeIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
                                 <a href="#" onclick="onStarMedia(event,'{{ $item->id }}')">
                                 <ion-icon @if ($item->user_star) name="star" @else
-                                                                                                                                                                                                                                            name="star-outline" @endif id="starIcon_{{ $item->id }}">
+                                                                                                                                                                                                                                                name="star-outline" @endif id="starIcon_{{ $item->id }}">
                                     </ion-icon>
                                 </a>
                                 {{-- <a href="#" >

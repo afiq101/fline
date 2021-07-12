@@ -19,8 +19,8 @@ class MediaController extends Controller
     public function index()
     {
         $getUserMedia = DB::table('medias')
-                ->where('userid', '=', Auth::id())
-                ->get();
+            ->where('userid', '=', Auth::id())
+            ->get();
 
         return view('Media.MainPage', ['userMedia' => $getUserMedia]);
     }
@@ -43,68 +43,61 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('file'))
-            {
-                $date = Carbon::now();
-                
-                $fileNameToStore = $request->file->hashName();
+        if ($request->hasFile('file')) {
+            $date = Carbon::now();
 
-                $fileSize = $request->file('file')->getSize();
+            $fileNameToStore = $request->file->hashName();
 
-                $extension = $request->file('file')->extension();
+            $fileSize = $request->file('file')->getSize();
 
-                $file = $request->file;
+            $extension = $request->file('file')->extension();
 
-                if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
-                {
-                    $getID3 = new \getID3;
-                    $fileinfo = $getID3->analyze($file);
-                    $duration = date('H:i:s.v', $fileinfo['playtime_seconds']);
-                }
+            $file = $request->file;
 
-                else
-                {
-                    $data = getimagesize($file);
-                    $width = $data[0];
-                    $height = $data[1];
-
-                }
-
-                $pid = Auth::id();
-                
-                $file->move("assets/images/media", $fileNameToStore);
-
-                $id = DB::table('medias')->insertGetId([
-                    'title' => $request->name,
-                    'extension' => $extension,
-                    'description' => $request->desc,
-                    'path' => $fileNameToStore,
-                    'size' => $fileSize,
-                    'userid' => $pid,
-                    'created_at' => $date
-                ]);
-
-                if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
-                {
-                    DB::table('videos')->insert([
-                        'duaration' => $duration,
-                        'mediaid' => $id
-                    ]);
-                }
-                else
-                {
-                    DB::table('images')->insert([
-                        'width' => $width,
-                        'height' => $height,
-                        'mediaid' => $id
-                    ]);
-                }
-                $getUserMedia = DB::table('medias')
-                    ->where('userid', '=', Auth::id())
-                    ->get();
-                return view('Media.MainPage', ['userMedia' => $getUserMedia]);
-                
+            if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") {
+                $getID3 = new \getID3;
+                $fileinfo = $getID3->analyze($file);
+                $duration = date('H:i:s.v', $fileinfo['playtime_seconds']);
+            } else if ($extension == "jpeg" ||  $extension == "jpg" ||  $extension == "png" || $extension == "gif") {
+                $data = getimagesize($file);
+                $width = $data[0];
+                $height = $data[1];
+            } else {
+                return view('Media.UploadPage')->with('failed', 'Please Insert The Right Format .');
             }
+            $pid = Auth::id();
+
+            $file->move("assets/images/media", $fileNameToStore);
+
+            $id = DB::table('medias')->insertGetId([
+                'title' => $request->name,
+                'extension' => $extension,
+                'description' => $request->desc,
+                'path' => $fileNameToStore,
+                'size' => $fileSize,
+                'userid' => $pid,
+                'created_at' => $date
+            ]);
+
+            if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") {
+                DB::table('videos')->insert([
+                    'duaration' => $duration,
+                    'mediaid' => $id
+                ]);
+            } else {
+                DB::table('images')->insert([
+                    'width' => $width,
+                    'height' => $height,
+                    'mediaid' => $id
+                ]);
+            }
+            $getUserMedia = DB::table('medias')
+                ->where('userid', '=', Auth::id())
+                ->get();
+
+            
+            return redirect('/manage');
+        }
     }
 
     /**
@@ -144,35 +137,31 @@ class MediaController extends Controller
     public function update(Request $request)
     {
         $date = Carbon::now();
-        if(!$request->hasFile('file')){
+        if (!$request->hasFile('file')) {
             DB::table('medias')
-              ->where('id', '=' , $request->id)
-              ->update([
-                  'title' => $request->name, 
-                  'description' => $request->desc, 
-                  'updated_at' => $date
+                ->where('id', '=', $request->id)
+                ->update([
+                    'title' => $request->name,
+                    'description' => $request->desc,
+                    'updated_at' => $date
                 ]);
-        }
-        else{
-            $pathOld = $request->path; 
-            
-            $file =public_path("assets/images/media/$pathOld");
+        } else {
+            $pathOld = $request->path;
+
+            $file = public_path("assets/images/media/$pathOld");
             unlink($file);
-            
+
             $fileNameToStore = $request->file->hashName();
             $fileSize = $request->file('file')->getSize();
             $extension = $request->file('file')->extension();
             $file = $request->file;
-            
-        
-            if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
-            {
+
+
+            if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") {
                 $getID3 = new \getID3;
                 $fileinfo = $getID3->analyze($file);
                 $duration = date('H:i:s.v', $fileinfo['playtime_seconds']);
-            }
-            else
-            {
+            } else {
                 $data = getimagesize($file);
                 $width = $data[0];
                 $height = $data[1];
@@ -182,39 +171,35 @@ class MediaController extends Controller
             $file->move("assets/images/media/", $fileNameToStore);
 
             DB::table('medias')
-            ->where('id', $request->id)
-            ->update([
-                'title' => $request->name,
-                'extension' => $extension,
-                'description' => $request->desc,
-                'path' => $fileNameToStore,
-                'size' => $fileSize,
-            ]);
-            
-            if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") 
-            {
+                ->where('id', $request->id)
+                ->update([
+                    'title' => $request->name,
+                    'extension' => $extension,
+                    'description' => $request->desc,
+                    'path' => $fileNameToStore,
+                    'size' => $fileSize,
+                ]);
+
+            if ($extension == "x-flv" || $extension == "mp4" || $extension == "x-mpegURL" || $extension == "MP2T" || $extension == "3gpp" || $extension == "quicktime" || $extension == "x-msvideo" || $extension == "x-ms-wmv") {
                 DB::table('videos')
-                ->where('mediaid', $request->id)
-                ->update([
-                    'duaration' => $duration
-                ]);
-            }
-            else
-            {
+                    ->where('mediaid', $request->id)
+                    ->update([
+                        'duaration' => $duration
+                    ]);
+            } else {
                 DB::table('images')
-                ->where('mediaid', $request->id)
-                ->update([
-                    'width' => $width,
-                    'height' => $height
-                ]);
+                    ->where('mediaid', $request->id)
+                    ->update([
+                        'width' => $width,
+                        'height' => $height
+                    ]);
             }
-           
-        
         }
-        $getUserMedia = DB::table('medias')
-        ->where('userid', '=', Auth::id())
-        ->get();
-        return view('Media.MainPage', ['userMedia' => $getUserMedia]);
+        // $getUserMedia = DB::table('medias')
+        //     ->where('userid', '=', Auth::id())
+        //     ->get();
+        // return view('Media.MainPage', ['userMedia' => $getUserMedia]);
+        return redirect('/manage');
     }
 
     /**
@@ -229,28 +214,29 @@ class MediaController extends Controller
         DB::table('videos')->where('mediaid', '=', $id)->delete();
         DB::table('user_likes')->where('media_id', '=', $id)->delete();
         DB::table('medias')->where('id', '=', $id)->delete();
-        return $this->index();
+        // return $this->index();
+        return redirect('/manage');
     }
 
 
     public function getMetadata($id)
     {
         $getMetadataImage = DB::table('medias')
-        ->join('images', 'medias.id', '=', 'images.mediaid')
-        ->select('medias.*', 'images.width', 'images.height')
-        ->where('medias.id', '=', $id)
-        ->get();
-        
+            ->join('images', 'medias.id', '=', 'images.mediaid')
+            ->select('medias.*', 'images.width', 'images.height')
+            ->where('medias.id', '=', $id)
+            ->get();
+
         $getMetadataVideo = DB::table('medias')
-        ->join('videos', 'medias.id', '=', 'videos.mediaid')
-        ->select('medias.*', 'videos.duaration')
-        ->where('medias.id', '=', $id)
-        ->get();
+            ->join('videos', 'medias.id', '=', 'videos.mediaid')
+            ->select('medias.*', 'videos.duaration')
+            ->where('medias.id', '=', $id)
+            ->get();
 
         return response()->json([
             'imagemeta' => $getMetadataImage,
             'videometa' => $getMetadataVideo
-         ],200);
+        ], 200);
     }
 }
 
