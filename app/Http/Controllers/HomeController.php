@@ -30,13 +30,34 @@ class HomeController extends Controller
         $search = null;
         $images = Media::select();
 
-        if ($request->has('search') && $request->input('search') != ''){
-            $images = $images->where('title','LIKE','%' . $request->input('search') . '%');
+        if ($request->has('search') && $request->input('search') != '') {
+            $images = $images->where('title', 'LIKE', '%' . $request->input('search') . '%');
             $search = $request->input('search');
         }
 
         $images = $images->get();
 
-        return view('index', compact('images','search'));
+        return view('index', compact('images', 'search'));
+    }
+
+    public function getMedia(Request $request)
+    {
+        $mid = $request->get('mid');
+        $medias = DB::table('medias')
+            ->leftJoin('images', 'medias.id', '=', 'images.mediaid')
+            ->select(
+                'medias.path as mediapath',
+                'medias.extension as mediaex',
+                'medias.title as mediattl',
+                'medias.description as mediadesc',
+                'medias.created_at as mediadateup',
+                'medias.size as mediasize',
+                'images.height as imgheight',
+                'images.width as imgwidth'
+            )
+            ->where('medias.id', $mid)
+            ->get();
+
+        return response()->json(['success' => $medias]);
     }
 }

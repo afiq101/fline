@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
-    <a class="navbar-brand" href="home">
+    <a class="navbar-brand" href="/">
         <img alt="Brand" width="100" src="{{ URL::asset('assets/images/logo/logo.png') }}">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -12,7 +12,7 @@
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('Media.Media.index') }}">Manage</a>
+                <a class="nav-link" href="/manage">Manage</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/profile">Profile</a>

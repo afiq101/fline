@@ -72,7 +72,7 @@ class MediaController extends Controller
 
                 $pid = Auth::id();
                 
-                $file->move("assets/Media/", $fileNameToStore);
+                $file->move("assets/images/media", $fileNameToStore);
 
                 $id = DB::table('medias')->insertGetId([
                     'title' => $request->name,
@@ -156,7 +156,7 @@ class MediaController extends Controller
         else{
             $pathOld = $request->path; 
             
-            $file =public_path("assets/Media/$pathOld");
+            $file =public_path("assets/images/media/$pathOld");
             unlink($file);
             
             $fileNameToStore = $request->file->hashName();
@@ -179,7 +179,7 @@ class MediaController extends Controller
             }
 
             $pid = Auth::id();
-            $file->move("assets/Media/", $fileNameToStore);
+            $file->move("assets/images/media/", $fileNameToStore);
 
             DB::table('medias')
             ->where('id', $request->id)
@@ -208,12 +208,13 @@ class MediaController extends Controller
                     'height' => $height
                 ]);
             }
-            $getUserMedia = DB::table('medias')
-            ->where('userid', '=', Auth::id())
-            ->get();
-            return view('Media.MainPage', ['userMedia' => $getUserMedia]);
+           
         
         }
+        $getUserMedia = DB::table('medias')
+        ->where('userid', '=', Auth::id())
+        ->get();
+        return view('Media.MainPage', ['userMedia' => $getUserMedia]);
     }
 
     /**

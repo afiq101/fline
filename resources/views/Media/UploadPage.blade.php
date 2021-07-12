@@ -8,7 +8,7 @@
                 <div class="card-header">Upload Page</div>
 
                 <div class="card-body">
-                    <form action="{{route('Media.Media.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="/manage/save" method="POST" enctype="multipart/form-data">
 
                     @csrf
                     <div class="form-group row">
