@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/720c7ff6-06b9-417f-9fc8-848b37a64050/resourceGroups/fline/providers/Microsoft.Web/sites/fline",
+    "appService.deploySubpath": "."
+}

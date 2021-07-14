@@ -37,7 +37,7 @@ The application utilizes the following Tech Stacks:
 **FLINE** can be accessed through the following link:
 
 ```
-coming soon
+http://157.230.252.148
 ```
 
 ## Instruction to Deploy
